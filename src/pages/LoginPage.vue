@@ -1,15 +1,23 @@
 <template>
   <q-page padding>
-    <q-form @submit.prevent="submit">
-      <q-input v-model="name" label="Name" autocomplete="username" autofocus />
+    <q-form @submit.prevent="submit" class="q-gutter-y-sm">
+      <div class="text-center text-h5">Login</div>
+      <q-input
+        v-model="name"
+        label="Name"
+        autocomplete="username"
+        autofocus
+        outlined
+      />
       <q-input
         v-model="password"
         label="Password"
         autocomplete="username"
         type="password"
+        outlined
       />
       <div class="text-right">
-        <q-btn flat no-caps label="Login" type="submit" />
+        <q-btn no-caps label="Login" type="submit" glossy />
       </div>
     </q-form>
   </q-page>

@@ -32,6 +32,7 @@ module.exports = configure(function (/* ctx */) {
     boot: [
       'i18n',
       'axios',
+      'router-auth'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
@@ -129,7 +130,7 @@ module.exports = configure(function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ["Loading", "LocalStorage", "Notify", "LoadingBar"]
+      plugins: ["Loading", "LocalStorage", "Notify", "LoadingBar", "Dialog"]
     },
 
     // animations: 'all', // --- includes all animations
