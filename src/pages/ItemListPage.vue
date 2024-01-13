@@ -1,6 +1,6 @@
 <template>
-  <q-page padding class="row" v-if="pagination">
-    <div class="q-pa-sm col" v-for="item in pagination.data" :key="item.id">
+  <q-page padding class="row content-baseline" v-if="pagination">
+    <div class="q-pa-sm col-12" v-for="item in pagination.data" :key="item.id">
       <q-card
         @click="$router.push({ name: 'item-details', params: { id: item.id } })"
       >
