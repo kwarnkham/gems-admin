@@ -22,7 +22,6 @@
       <div v-if="item.specification?.origin">
         Origin : {{ item.specification?.origin }}
       </div>
-
       <FileInput v-model="pictures" multiple v-slot="{ pickFiles }">
         <q-btn
           flat
@@ -118,14 +117,21 @@ const submit = () => {
     headers: {
       "Content-Type": "multipart/form-data",
     },
-  }).then(() => {
-    router.push({
-      name: "item-details",
-      params: {
-        id: item.value.id,
-      },
+  })
+    .then(() => {
+      router.push({
+        name: "item-details",
+        params: {
+          id: item.value.id,
+        },
+      });
+    })
+    .catch((e) => {
+      notify({
+        message: e.response?.data?.message || e.message,
+        type: "negative",
+      });
     });
-  });
 };
 onMounted(() => {
   api({
