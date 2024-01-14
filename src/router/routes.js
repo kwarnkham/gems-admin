@@ -52,6 +52,14 @@ const routes = [
         }
       },
       {
+        path: 'update-item/:id',
+        component: () => import('pages/UpdateItemPage.vue'),
+        name: 'update-item',
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
         path: 'item-list',
         component: () => import('pages/ItemListPage.vue'),
         name: 'item-list',

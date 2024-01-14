@@ -1,7 +1,18 @@
 <template>
   <q-page padding v-if="item">
+    <q-btn
+      label="Edit info"
+      no-caps
+      @click="
+        $router.push({
+          name: 'update-item',
+        })
+      "
+    />
     <div>Name : {{ item.name }}</div>
     <div>Description : {{ item.description }}</div>
+    <q-separator spaced />
+    <q-btn label="Edit specification" no-caps />
     <div v-if="item.specification?.carat">
       Carat : {{ item.specification?.carat }}
     </div>
@@ -20,7 +31,7 @@
     <div v-if="item.specification?.origin">
       Origin : {{ item.specification?.origin }}
     </div>
-
+    <q-separator spaced />
     <q-banner class="bg-primary text-white">
       <template v-if="item.active_prices?.length">
         <div>
@@ -107,7 +118,7 @@ const removePrice = () => {
         usd: price.usd,
         active: false,
       },
-    }).then(({ data }) => {
+    }).then(() => {
       item.value.active_prices = [];
     });
   });

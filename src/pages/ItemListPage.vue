@@ -9,7 +9,7 @@
         </q-card-section>
         <q-card-section>
           <q-img
-            :src="item.pictures[0].name"
+            :src="item.pictures[0]?.name"
             v-if="item.pictures"
             fit="contain"
             height="150px"
