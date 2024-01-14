@@ -31,6 +31,10 @@ const props = defineProps({
     type: Object,
     default: null,
   },
+  update: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const { notify } = useQuasar();
@@ -59,13 +63,13 @@ const submit = () => {
     },
   };
 
-  if (props.item) {
+  if (props.update) {
     options.method = "PUT";
     options.url = `specifications/${props.item.specification.id}`;
   }
   api(options)
     .then(() => {
-      if (props.item) router.go(-1);
+      if (props.update) router.go(-1);
       else
         router.push({
           name: "add-item-picture",

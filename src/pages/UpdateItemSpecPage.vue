@@ -1,6 +1,6 @@
 <template>
   <q-page padding v-if="item">
-    <ItemSpecForm title="Update Item Specification" :item="item" />
+    <ItemSpecForm title="Update Item Specification" :item="item" update />
   </q-page>
 </template>
 

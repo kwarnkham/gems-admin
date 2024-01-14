@@ -17,7 +17,7 @@
       no-caps
       @click="
         $router.push({
-          name: 'update-item-spec',
+          name: item.specification ? 'update-item-spec' : 'add-item-spec',
           params: {
             itemId: item.id,
           },
