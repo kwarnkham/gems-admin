@@ -1,21 +1,23 @@
 import { onMounted, ref, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
 import { api } from "src/boot/axios"
+import { useQuasar } from "quasar";
 
-export default function usePagination ({ url, params = { per_page: 10 } }) {
-  const route = useRoute();
-  const router = useRouter();
+export default function usePagination ({ url, params = { per_page: 10 }, append = false }) {
   const pagination = ref(null);
   const totalAmount = ref(0)
   const currentPage = ref(1);
+  const fetching = ref(false)
+  let filters = { ...params }
+
+  const { notify } = useQuasar()
 
   const fetcher = (query) => {
-    query = { ...params, ...query }
+    filters = { ...filters, ...query }
     return new Promise((resolve, reject) => {
       api({
         method: "GET",
         url,
-        params: query,
+        params: filters,
       }).then(response => {
         resolve(response)
       }).catch(error => {
@@ -24,50 +26,39 @@ export default function usePagination ({ url, params = { per_page: 10 } }) {
     })
   };
 
-  const fetch = (query, updateCurrentPage = false) => {
+  const fetch = (query, replace = false) => {
+    fetching.value = true
     fetcher(query).then(({ data }) => {
+      if (append && pagination.value && !replace) {
+        const oldData = JSON.parse(JSON.stringify(pagination.value.data))
+        data.data.data = [...oldData, ...data.data.data]
+      }
       pagination.value = data.data;
-      if (updateCurrentPage) currentPage.value = data.data.current_page;
       totalAmount.value = data.total_amount
-    });
+    }).catch(e => {
+      notify({
+        message: e.response?.data?.message || e.message,
+        type: "negative",
+      });
+    })
+      .finally(() => {
+        fetching.value = false
+      });
   }
 
   const updateQueryAndFetch = (newQuery) => {
-    const options = {
-      name: route.name,
-      query: JSON.parse(JSON.stringify(route.query)),
-    };
-    options.query = { ...options.query, ...newQuery };
-    Object.keys(options.query).forEach(key => {
-      if (!options.query[key]) delete options.query[key]
-    })
-    router.replace(options).then(() => {
-      if (currentPage.value == 1) fetch(options.query)
-      else currentPage.value = 1
-    });
+    const filters = { ...filters, ...newQuery }
+    if (currentPage.value == 1) fetch(filters)
+    else currentPage.value = 1
   };
 
   onMounted(() => {
-    let query = JSON.parse(JSON.stringify(route.query))
-    if (params) query = { ...query, ...params }
-    router.replace({
-      name: route.name,
-      query: query
-    }).then(() => {
-      fetch(query)
-    })
+    fetch(filters)
   })
 
   watch(currentPage, () => {
-    const query = { ...route.query, page: currentPage.value }
-    router
-      .replace({
-        name: route.name,
-        query,
-      })
-      .then(() => {
-        fetch(query)
-      });
+    filters = { ...filters, page: currentPage.value }
+    fetch(filters)
   });
 
   return {
@@ -75,5 +66,6 @@ export default function usePagination ({ url, params = { per_page: 10 } }) {
     currentPage,
     totalAmount,
     updateQueryAndFetch,
+    fetching
   }
 }

@@ -48,13 +48,17 @@
         <div>
           MMK
           <span>{{
-            item.active_prices[item.active_prices.length - 1].mmk
+            item.active_prices[
+              item.active_prices.length - 1
+            ].mmk.toLocaleString()
           }}</span>
         </div>
         <div>
           USD
           <span>{{
-            item.active_prices[item.active_prices.length - 1].usd
+            item.active_prices[
+              item.active_prices.length - 1
+            ].usd.toLocaleString()
           }}</span>
         </div>
         <div>

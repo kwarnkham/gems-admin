@@ -13,5 +13,12 @@ export default function useUtils () {
     });
     return formData;
   };
-  return { buildForm }
+
+  const isScrollEndByBody = (position) => {
+    const scrollHeight = document.body.scrollHeight;
+    const isScrollEnd = position + window.innerHeight + 100 >= scrollHeight
+    return isScrollEnd
+  }
+
+  return { buildForm, isScrollEndByBody }
 }
