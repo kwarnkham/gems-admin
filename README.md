@@ -1,41 +1,7 @@
-# Gems Admin (gems-admin)
+scp spa.zip root@coffee.book-mm.com:/root/
 
-Admin for gems
-
-## Install the dependencies
-```bash
-yarn
-# or
-npm install
+```
+cd /etc/nginx/html/gems-admin && rm -rf ./* && mv /root/spa.zip ./spa.zip && unzip spa.zip && rm -rf spa.zip && mv spa/* ./ && rm -rf spa
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
-
-
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-
-### Format the files
-```bash
-yarn format
-# or
-npm run format
-```
-
-
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+systemctl restart nginx
