@@ -60,6 +60,14 @@ const routes = [
         }
       },
       {
+        path: 'update-item-spec/:itemId',
+        component: () => import('pages/UpdateItemSpecPage.vue'),
+        name: 'update-item-spec',
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
         path: 'item-list',
         component: () => import('pages/ItemListPage.vue'),
         name: 'item-list',

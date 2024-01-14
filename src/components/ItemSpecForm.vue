@@ -42,8 +42,9 @@ const certification = ref(props.item.specification?.certification ?? "");
 const origin = ref(props.item.specification?.origin ?? "");
 const shape = ref(props.item.specification?.shape ?? "");
 const router = useRouter();
+
 const submit = () => {
-  api({
+  const options = {
     method: "POST",
     url: "specifications",
     data: {
@@ -56,14 +57,22 @@ const submit = () => {
       origin: origin.value,
       shape: shape.value,
     },
-  })
+  };
+
+  if (props.item) {
+    options.method = "PUT";
+    options.url = `specifications/${props.item.specification.id}`;
+  }
+  api(options)
     .then(() => {
-      router.push({
-        name: "add-item-picture",
-        params: {
-          itemId: props.item.id,
-        },
-      });
+      if (props.item) router.go(-1);
+      else
+        router.push({
+          name: "add-item-picture",
+          params: {
+            itemId: props.item.id,
+          },
+        });
     })
     .catch((e) => {
       notify({

@@ -12,7 +12,18 @@
     <div>Name : {{ item.name }}</div>
     <div>Description : {{ item.description }}</div>
     <q-separator spaced />
-    <q-btn label="Edit specification" no-caps />
+    <q-btn
+      label="Edit specification"
+      no-caps
+      @click="
+        $router.push({
+          name: 'update-item-spec',
+          params: {
+            itemId: item.id,
+          },
+        })
+      "
+    />
     <div v-if="item.specification?.carat">
       Carat : {{ item.specification?.carat }}
     </div>
