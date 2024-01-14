@@ -19,6 +19,7 @@
 <script setup>
 import { useQuasar } from "quasar";
 import { api } from "src/boot/axios";
+import useUtils from "src/composables/utils";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
@@ -46,21 +47,23 @@ const certification = ref(props.item.specification?.certification ?? "");
 const origin = ref(props.item.specification?.origin ?? "");
 const shape = ref(props.item.specification?.shape ?? "");
 const router = useRouter();
+const { trimObject } = useUtils();
 
 const submit = () => {
+  const data = {
+    item_id: props.item.id,
+    carat: carat.value,
+    cut: cut.value,
+    clarity: clarity.value,
+    color: color.value,
+    certification: certification.value,
+    origin: origin.value,
+    shape: shape.value,
+  };
   const options = {
     method: "POST",
     url: "specifications",
-    data: {
-      item_id: props.item.id,
-      carat: carat.value,
-      cut: cut.value,
-      clarity: clarity.value,
-      color: color.value,
-      certification: certification.value,
-      origin: origin.value,
-      shape: shape.value,
-    },
+    data: props.update ? data : trimObject(data),
   };
 
   if (props.update) {

@@ -20,5 +20,19 @@ export default function useUtils () {
     return isScrollEnd
   }
 
-  return { buildForm, isScrollEndByBody }
+  const trimObject = (obj) => {
+    const newObj = {};
+    for (const key in obj) {
+      if (
+        obj.hasOwnProperty(key) &&
+        obj[key] !== '' &&
+        obj[key] !== undefined &&
+        obj[key] !== null) {
+        newObj[key] = obj[key];
+      }
+    }
+    return newObj;
+  }
+
+  return { buildForm, isScrollEndByBody, trimObject }
 }
