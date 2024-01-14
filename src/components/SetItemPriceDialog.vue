@@ -24,13 +24,13 @@
           />
         </q-card-section>
         <q-card-actions align="right">
-          <q-btn color="primary" label="Ok" type="submit" no-caps />
           <q-btn
             color="primary"
             label="Cancel"
             @click="onDialogCancel"
             no-caps
           />
+          <q-btn color="primary" label="Ok" type="submit" no-caps />
         </q-card-actions>
       </q-form>
     </q-card>
