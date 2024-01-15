@@ -103,11 +103,14 @@ watch(
 );
 
 const submit = () => {
-  if (pictures.value.length < 1)
+  if (pictures.value.length < 1) {
     notify({
       message: "Please select at least one picture",
       type: "negative",
     });
+    return;
+  }
+
   api({
     method: "POST",
     url: `items/${item.value.id}/pictures`,

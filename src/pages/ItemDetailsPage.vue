@@ -1,6 +1,7 @@
 <template>
   <q-page padding v-if="item">
     <q-btn
+      class="q-mb-xs"
       label="Edit info"
       no-caps
       @click="
@@ -13,6 +14,7 @@
     <div>Description : {{ item.description }}</div>
     <q-separator spaced />
     <q-btn
+      class="q-mb-xs"
       label="Edit specification"
       no-caps
       @click="
@@ -41,6 +43,31 @@
     </div>
     <div v-if="item.specification?.origin">
       Origin : {{ item.specification?.origin }}
+    </div>
+    <q-separator spaced />
+    <div v-if="item.categories.length" class="q-gutter-x-sm q-mb-sm">
+      <q-badge
+        v-for="category in item.categories"
+        :key="category.id"
+        @click="removeCategory(category)"
+      >
+        {{ category.name }}
+      </q-badge>
+    </div>
+    <div v-else class="text-overline">No Category Added</div>
+    <SelectInput
+      v-model="selectedCategories"
+      multiple
+      resource="categories"
+      label="Select Categories"
+    />
+    <div class="text-right q-mt-sm">
+      <q-btn
+        label="Sync Categories"
+        no-caps
+        color="primary"
+        @click="syncCategories"
+      />
     </div>
     <q-separator spaced />
     <q-banner class="bg-primary text-white">
@@ -132,13 +159,27 @@ import SetItemPriceDialog from "src/components/SetItemPriceDialog.vue";
 import FileInput from "src/components/FileInput.vue";
 import { watch } from "vue";
 import useUtils from "src/composables/utils";
+import SelectInput from "src/components/SelectInput.vue";
 
 const item = ref(null);
 const route = useRoute();
 const { notify, dialog } = useQuasar();
+const selectedCategories = ref([]);
 
 const pictures = ref([]);
 const { buildForm } = useUtils();
+
+const syncCategories = () => {
+  api({
+    url: `items/${item.value.id}/categories/sync`,
+    method: "POST",
+    data: {
+      category_ids: selectedCategories.value.map((e) => e.id),
+    },
+  }).then(({ data }) => {
+    item.value = data;
+  });
+};
 
 const deletePicture = (id) => {
   dialog({
@@ -156,6 +197,21 @@ const deletePicture = (id) => {
         1
       );
     });
+  });
+};
+
+const removeCategory = (category) => {
+  dialog({
+    title: "Confirmation",
+    message: `Remove the category, ${category.name}?`,
+    noBackdropDismiss: true,
+    cancel: true,
+  }).onOk(() => {
+    selectedCategories.value.splice(
+      selectedCategories.value.findIndex((e) => e.id == category.id),
+      1
+    );
+    syncCategories();
   });
 };
 
@@ -226,6 +282,7 @@ onMounted(() => {
   })
     .then(({ data }) => {
       item.value = data;
+      selectedCategories.value = item.value.categories;
     })
     .catch((e) => {
       notify({
