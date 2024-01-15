@@ -77,6 +77,20 @@ const routes = [
       },
     ]
   },
+  {
+    path: '/client',
+    component: () => import('layouts/ClientLayout.vue'),
+    children: [
+      {
+        path: 'item-list', component: () => import('pages/ClientItemListPage.vue'),
+        name: 'client-item-list',
+      },
+      {
+        path: 'item-details', component: () => import('pages/ClientItemDetailsPage.vue'),
+        name: 'client-item-details',
+      }
+    ]
+  },
 
   // Always leave this as last one,
   // but you can also remove it

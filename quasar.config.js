@@ -116,7 +116,10 @@ module.exports = configure(function (/* ctx */) {
           negative: '#52040d',
           info: '#1b535e',
           warning: '#6e5000'
-        }
+        },
+        loadingBar: {
+          color: "indigo-9"
+        },
       },
 
       // iconSet: 'material-icons', // Quasar icon set
