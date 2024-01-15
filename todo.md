@@ -1,6 +1,8 @@
 1. Toggle item status
 2. Search item
 3. preorder item
+4. schedule to clean up s3 space
+5. backup the project
 
 # Pre-order
 
