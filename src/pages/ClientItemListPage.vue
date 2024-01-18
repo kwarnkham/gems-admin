@@ -1,11 +1,11 @@
 <template>
   <q-page padding v-if="pagination" class="row content-baseline">
     <div class="q-pa-sm col-12" v-for="item in pagination.data" :key="item.id">
-      <q-card class="rounded card" dark>
+      <q-card class="rounded" dark>
         <q-img :src="item.pictures[0].name" v-if="item.pictures.lenth" />
         <q-img
           v-else
-          src="https://assets.pi55xx.com/gems/assets/diamond-logo-2.png"
+          src="https://assets.pi55xx.com/gems/assets/diamond-logo-1.png"
         >
           <div class="absolute-bottom text-subtitle2 text-center card-label">
             {{ item.name }}
@@ -30,9 +30,6 @@ const { pagination } = usePagination({
 </script>
 
 <style lang="scss" scoped>
-.card {
-  height: 229.63px;
-}
 .card-label {
   padding: 5px;
 }

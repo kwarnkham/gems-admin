@@ -17,10 +17,7 @@
         </q-card-section>
         <q-card-section class="row">
           <div class="col-12 text-ellipsis">
-            {{ item.description }} Lorem ipsum dolor sit amet consectetur,
-            adipisicing elit. Veniam non ipsam laboriosam laudantium quaerat
-            fugiat aspernatur deleniti quia inventore, aliquam ullam eligendi
-            sapiente harum dolor nisi, facere minima voluptates culpa.
+            {{ item.description }}
           </div>
         </q-card-section>
       </q-card>
