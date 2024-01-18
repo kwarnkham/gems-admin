@@ -13,9 +13,9 @@
           no-caps
         />
         <q-route-tab
-          :to="{ name: 'client-item-details' }"
+          :to="{ name: 'contact' }"
           replace
-          label="Other Tab"
+          icon="support_agent"
           no-caps
         />
       </q-tabs>
@@ -37,9 +37,11 @@
 .page {
   background-image: linear-gradient(to bottom, #142233, #fff, #142233);
 }
-:deep(.q-icon) {
-  img {
-    filter: invert(1);
+:deep(.q-footer) {
+  .q-icon {
+    img {
+      filter: invert(1);
+    }
   }
 }
 </style>

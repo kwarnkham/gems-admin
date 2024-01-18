@@ -86,6 +86,10 @@ const routes = [
         name: 'client-item-list',
       },
       {
+        path: 'contact', component: () => import('pages/ContactPage.vue'),
+        name: 'contact',
+      },
+      {
         path: 'item-details/:id', component: () => import('pages/ClientItemDetailsPage.vue'),
         name: 'client-item-details',
       }
