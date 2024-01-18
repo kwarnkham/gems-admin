@@ -3,11 +3,22 @@
     <q-img src="https://assets.pi55xx.com/gems/assets/diamond-logo-1.png" />
     <q-form @submit.prevent="submit" class="form">
       <div class="text-center text-h6">We will contact you shortly</div>
-      <q-input label="Name" required v-model="name" />
-      <q-input label="Phone" required v-model="phone" type="tel" />
-      <q-input label="Your Message" v-model="message" autogrow />
+      <q-input label="Name" required v-model="name" :disable="disableForm" />
+      <q-input
+        label="Phone"
+        required
+        v-model="phone"
+        type="tel"
+        :disable="disableForm"
+      />
+      <q-input
+        label="Your Message"
+        v-model="message"
+        autogrow
+        :disable="disableForm"
+      />
       <div class="text-right">
-        <q-btn icon="send" type="submit" flat />
+        <q-btn icon="send" type="submit" flat :disable="disableForm" />
       </div>
     </q-form>
     <q-card class="full-width" dark>
@@ -31,16 +42,50 @@
 
 <script setup>
 import { copyToClipboard, useQuasar } from "quasar";
+import { api } from "src/boot/axios";
+import { onMounted } from "vue";
 import { ref } from "vue";
 
-const { notify } = useQuasar();
+const { notify, localStorage, dialog } = useQuasar();
 
-const name = ref("");
-const phone = ref("");
-const message = ref("");
+let contact = localStorage.getItem("contact");
+if (contact && contact.time + 1000 * 60 * 60 <= Date.now()) {
+  localStorage.remove("contact");
+  contact = null;
+}
+const name = ref(contact?.name || "");
+const phone = ref(contact?.phone || "");
+const message = ref(contact?.message || "");
 const number = "+959452538242";
+const disableForm = ref(false);
 
-const submit = () => {};
+const submit = () => {
+  api({
+    method: "POST",
+    url: "contacts",
+    data: {
+      name: name.value,
+      message: message.value,
+      phone: phone.value,
+    },
+  })
+    .then(({ data }) => {
+      disableForm.value = true;
+      data.time = Date.now();
+      localStorage.set("contact", data);
+      dialog({
+        title: "Thank you",
+        message: "We will contact you soon",
+      });
+    })
+    .catch((e) => {
+      notify({
+        message: e.response?.data?.message || e.message,
+        type: "negative",
+      });
+    });
+};
+
 const callMe = () => {
   window.location.href = "tel:" + number;
 };
@@ -53,6 +98,12 @@ const copyNumber = () => {
     });
   });
 };
+
+onMounted(() => {
+  if (contact) {
+    disableForm.value = true;
+  }
+});
 </script>
 
 <style lang="scss" scoped>
