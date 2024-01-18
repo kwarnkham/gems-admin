@@ -11,8 +11,16 @@ export default function useApp () {
     localStorage.remove("token")
     api.defaults.headers.common['Authorization'] = undefined;
   }
+
+  const vhPage = (offset, height) => {
+    return {
+      height: height - offset + "px",
+    }
+  };
+
   return {
     preserveToken,
-    removeToken
+    removeToken,
+    vhPage
   }
 }

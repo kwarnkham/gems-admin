@@ -1,5 +1,5 @@
 <template>
-  <q-page v-if="item" class="column bg-black q-px-xs">
+  <q-page v-if="item" class="column bg-black q-px-xs" :style-fn="vhPage">
     <q-carousel
       height="280px"
       swipeable
@@ -33,7 +33,7 @@
         </q-carousel-control>
       </template>
     </q-carousel>
-    <div class="info col">
+    <div class="info col column">
       <div class="spotlight">
         <div class="row price justify-between">
           <div>
@@ -41,7 +41,7 @@
           </div>
           <div class="text-right">
             <q-btn
-              v-if="false"
+              v-if="item.active_prices[0]"
               class="pointer-none"
               flat
               text-color="white"
@@ -71,6 +71,24 @@
           {{ item.description }}
         </div>
       </div>
+      <div class="text-h5 q-my-sm full-width text-white text-center">
+        Specification
+      </div>
+      <div class="row text-white col justify-between q-px-md">
+        <template v-for="key in Object.keys(item.specification)">
+          <div
+            :key="key"
+            v-if="
+              item.specification[key] &&
+              !['created_at', 'updated_at', 'id', 'item_id'].includes(key)
+            "
+            class="spec col-6"
+          >
+            <div class="capitalize">{{ key }}</div>
+            <div class="text-weight-bolder">{{ item.specification[key] }}</div>
+          </div>
+        </template>
+      </div>
     </div>
   </q-page>
 </template>
@@ -81,12 +99,14 @@ import { api } from "src/boot/axios";
 import { ref } from "vue";
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
+import useApp from "src/composables/app";
 
 const route = useRoute();
 const item = ref(null);
 const slide = ref(1);
 const fullscreen = ref(false);
 const { notify } = useQuasar();
+const { vhPage } = useApp();
 
 onMounted(() => {
   api({
@@ -107,6 +127,10 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+.spec {
+  font-size: 1.25em;
+  margin: 3px 0;
+}
 .spotlight {
   .price {
     font-weight: 500;
