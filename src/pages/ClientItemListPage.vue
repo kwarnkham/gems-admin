@@ -1,11 +1,24 @@
 <template>
   <q-page padding v-if="pagination" class="row content-baseline">
     <div class="q-pa-sm col-12" v-for="item in pagination.data" :key="item.id">
-      <q-card class="rounded" dark>
-        <q-img :src="item.pictures[0].name" v-if="item.pictures.lenth" />
+      <q-card
+        class="rounded"
+        dark
+        @click="
+          $router.push({
+            name: 'client-item-details',
+            params: {
+              id: item.id,
+            },
+          })
+        "
+      >
         <q-img
-          v-else
-          src="https://assets.pi55xx.com/gems/assets/diamond-logo-1.png"
+          :src="
+            item.pictures.length <= 0
+              ? 'https://assets.pi55xx.com/gems/assets/diamond-logo-1.png'
+              : item.pictures[0].name
+          "
         >
           <div class="absolute-bottom text-subtitle2 text-center card-label">
             {{ item.name }}

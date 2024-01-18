@@ -9,7 +9,7 @@
         <q-route-tab
           :to="{ name: 'client-item-list' }"
           replace
-          label="One Tab"
+          icon="img:/diamond.png"
           no-caps
         />
         <q-route-tab
@@ -36,5 +36,10 @@
 <style scoped lang="scss">
 .page {
   background-image: linear-gradient(to bottom, #142233, #fff, #142233);
+}
+:deep(.q-icon) {
+  img {
+    filter: invert(1);
+  }
 }
 </style>

@@ -86,7 +86,7 @@ const routes = [
         name: 'client-item-list',
       },
       {
-        path: 'item-details', component: () => import('pages/ClientItemDetailsPage.vue'),
+        path: 'item-details/:id', component: () => import('pages/ClientItemDetailsPage.vue'),
         name: 'client-item-details',
       }
     ]
