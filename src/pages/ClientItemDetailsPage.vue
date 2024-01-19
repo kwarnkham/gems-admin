@@ -34,41 +34,39 @@
       </template>
     </q-carousel>
     <div class="info col column">
-      <div class="spotlight">
-        <div class="row price justify-between">
-          <div>
-            {{ item.name }}
-          </div>
-          <div class="text-right">
+      <div
+        class="spotlight row justify-between items-center q-px-sm"
+        @click="showDescription"
+      >
+        <div>
+          {{ item.name }}
+        </div>
+        <div class="text-right">
+          <q-btn
+            v-if="item.active_prices[0]"
+            class="pointer-none"
+            flat
+            text-color="white"
+            :label="`MMK ${item.active_prices[0].mmk.toLocaleString()}`"
+          >
+            <q-badge floating>{{
+              new Date(item.active_prices[0].created_at).toLocaleString(
+                "en-GB",
+                { hour12: true }
+              )
+            }}</q-badge>
+          </q-btn>
+          <div v-else>
             <q-btn
-              v-if="item.active_prices[0]"
-              class="pointer-none"
               flat
               text-color="white"
-              :label="`MMK ${item.active_prices[0].mmk.toLocaleString()}`"
+              no-caps
+              :label="'Contact for price'"
+              icon="info"
+              dense
             >
-              <q-badge floating>{{
-                new Date(item.active_prices[0].created_at).toLocaleString(
-                  "en-GB",
-                  { hour12: true }
-                )
-              }}</q-badge>
             </q-btn>
-            <div v-else>
-              <q-btn
-                flat
-                text-color="white"
-                no-caps
-                :label="'Contact for price'"
-                icon="info"
-                dense
-              >
-              </q-btn>
-            </div>
           </div>
-        </div>
-        <div class="q-mt-sm">
-          {{ item.description }}
         </div>
       </div>
       <div class="text-h5 q-my-sm full-width text-white text-center">
@@ -105,8 +103,16 @@ const route = useRoute();
 const item = ref(null);
 const slide = ref(1);
 const fullscreen = ref(false);
-const { notify } = useQuasar();
+const { notify, dialog } = useQuasar();
 const { vhPage } = useApp();
+
+const showDescription = () => {
+  if (item.value.description)
+    dialog({
+      dark: true,
+      message: item.value.description,
+    });
+};
 
 onMounted(() => {
   api({
@@ -132,13 +138,9 @@ onMounted(() => {
   margin: 3px 0;
 }
 .spotlight {
-  .price {
-    font-weight: 500;
-    font-size: 1.5em;
-  }
-  padding: 10px;
-
-  height: 120px;
+  font-weight: 500;
+  font-size: 1.2em;
+  height: 50px;
   width: 100%;
   border-radius: 20px;
   background-color: rgb(20, 34, 51);
