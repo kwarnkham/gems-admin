@@ -19,6 +19,10 @@ const routes = [
         }
       },
       {
+        path: 'contact/:id', component: () => import('pages/ContactDetailsPage.vue'),
+        name: 'contact-details',
+      },
+      {
         path: 'login',
         component: () => import('pages/LoginPage.vue'),
         name: 'login',

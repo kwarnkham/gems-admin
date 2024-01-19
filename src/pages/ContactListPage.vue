@@ -4,14 +4,20 @@
       v-for="contact in pagination.data"
       :key="contact.id"
       :dark="contact.end_at != null"
+      @click="
+        $router.push({
+          name: 'contact-details',
+          params: {
+            id: contact.id,
+          },
+        })
+      "
     >
       <q-card-section>
         <div class="row justify-between q-mb-sm">
           <div><q-icon name="person" size="sm" />{{ contact.name }}</div>
-          <div>
-            <q-icon name="phone" size="sm" @click="makeCall(contact.phone)" />{{
-              contact.phone
-            }}
+          <div @click.stop="makeCall(contact.phone)">
+            <q-icon name="phone" size="sm" />{{ contact.phone }}
           </div>
         </div>
         <div>
