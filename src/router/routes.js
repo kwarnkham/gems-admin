@@ -12,6 +12,13 @@ const routes = [
         }
       },
       {
+        path: 'contacts', component: () => import('pages/ContactListPage.vue'),
+        name: 'contacts',
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
         path: 'login',
         component: () => import('pages/LoginPage.vue'),
         name: 'login',
@@ -68,9 +75,9 @@ const routes = [
         }
       },
       {
-        path: 'item-list',
+        path: 'items',
         component: () => import('pages/ItemListPage.vue'),
-        name: 'item-list',
+        name: 'items',
         meta: {
           requiresAuth: true
         }

@@ -1,5 +1,10 @@
 <template>
-  <q-page padding class="row content-baseline" v-if="pagination" v-scroll="foo">
+  <q-page
+    padding
+    class="row content-baseline"
+    v-if="pagination"
+    v-scroll="fetchMore"
+  >
     <div class="q-pa-sm col-12" v-for="item in pagination.data" :key="item.id">
       <q-card
         @click="$router.push({ name: 'item-details', params: { id: item.id } })"
@@ -41,7 +46,7 @@ const { pagination, currentPage, fetching } = usePagination({
 
 const { isScrollEndByBody } = useUtil();
 
-const foo = debounce((position) => {
+const fetchMore = debounce((position) => {
   if (isScrollEndByBody(position)) {
     if (pagination.value.last_page > currentPage.value) currentPage.value += 1;
   }

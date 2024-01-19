@@ -16,3 +16,9 @@
 ## Walk through the process of pre-ordering
 
 1. Category (ring, necklace, etc)
+
+# Preparation
+
+1. What preparation work can be done before bringing in client
+
+# Re-purchase policy
