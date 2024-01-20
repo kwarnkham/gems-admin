@@ -101,6 +101,14 @@ const routes = [
         name: 'contact',
       },
       {
+        path: 'client-home', component: () => import('pages/ClientHomePage.vue'),
+        name: 'client-home',
+      },
+      {
+        path: '4cs', component: () => import('pages/4CsPage.vue'),
+        name: '4cs',
+      },
+      {
         path: 'item-details/:id', component: () => import('pages/ClientItemDetailsPage.vue'),
         name: 'client-item-details',
       }

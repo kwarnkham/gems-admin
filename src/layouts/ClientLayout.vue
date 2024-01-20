@@ -7,6 +7,12 @@
         indicator-color="white"
       >
         <q-route-tab
+          :to="{ name: 'client-home' }"
+          replace
+          icon="home"
+          no-caps
+        />
+        <q-route-tab
           :to="{ name: 'client-item-list' }"
           replace
           icon="img:/diamond.png"
