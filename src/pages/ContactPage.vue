@@ -1,6 +1,6 @@
 <template>
   <q-page padding class="flex flex-center">
-    <q-img src="https://assets.pi55xx.com/gems/assets/diamond-logo-1.png" />
+    <q-img src="~/assets/logo-color.jpeg" class="rounded-borders" />
     <q-form @submit.prevent="submit" class="form">
       <div class="text-center text-h6">We will contact you shortly</div>
       <q-input label="Name" required v-model="name" :disable="disableForm" />
@@ -111,5 +111,6 @@ onMounted(() => {
   width: 100%;
   padding: 10px;
   border: 5px solid $primary;
+  border-radius: 4px;
 }
 </style>

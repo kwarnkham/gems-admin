@@ -5,3 +5,5 @@ cd /etc/nginx/html/gems-admin && rm -rf ./* && mv /root/spa.zip ./spa.zip && unz
 ```
 
 systemctl restart nginx
+
+`icongenie generate -m pwa -i /Users/moon/Documents/gems-admin/src/assets/icon.png -b /Users/moon/Documents/gems-admin/src/assets/icon.png`
