@@ -47,14 +47,25 @@
             class="pointer-none"
             flat
             text-color="white"
-            :label="`MMK ${item.active_prices[0].mmk.toLocaleString()}`"
           >
-            <q-badge floating>{{
-              new Date(item.active_prices[0].created_at).toLocaleString(
-                "en-GB",
-                { hour12: true }
-              )
-            }}</q-badge>
+            MMK
+            <span v-if="item.active_prices[0].mmk">
+              {{ item.active_prices[0].mmk?.toLocaleString() }}
+            </span>
+            <span v-else-if="appStore.getAppSetting">
+              {{
+                (
+                  item.active_prices[0].usd * appStore.getAppSetting.usd_rate
+                ).toLocaleString()
+              }}
+            </span>
+            <q-badge floating v-if="priceUpdateTime">
+              {{
+                new Date(priceUpdateTime).toLocaleString("en-GB", {
+                  hour12: true,
+                })
+              }}
+            </q-badge>
           </q-btn>
           <div v-else>
             <q-btn
@@ -98,6 +109,8 @@ import { ref } from "vue";
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import useApp from "src/composables/app";
+import { useAppStore } from "src/stores/app-store";
+import { computed } from "vue";
 
 const route = useRoute();
 const item = ref(null);
@@ -105,6 +118,7 @@ const slide = ref(1);
 const fullscreen = ref(false);
 const { notify, dialog } = useQuasar();
 const { vhPage } = useApp();
+const appStore = useAppStore();
 
 const showDescription = () => {
   if (item.value.description)
@@ -113,6 +127,20 @@ const showDescription = () => {
       message: item.value.description,
     });
 };
+
+const priceUpdateTime = computed(() => {
+  if (!item.value.active_prices[0]) return null;
+  if (item.value.active_prices[0].mmk)
+    return item.value.active_prices[0].updated_at;
+  else if (appStore.getAppSetting != null) {
+    if (
+      new Date(appStore.getAppSetting.updated_at).getTime() >
+      new Date(item.value.active_prices[0].updated_at).getTime()
+    ) {
+      return appStore.getAppSetting.updated_at;
+    } else return item.value.active_prices[0].updated_at;
+  } else return item.value.active_prices[0].updated_at;
+});
 
 onMounted(() => {
   api({

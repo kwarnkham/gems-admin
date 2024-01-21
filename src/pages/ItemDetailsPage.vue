@@ -73,6 +73,19 @@
             ].mmk.toLocaleString()
           }}</span>
         </div>
+        <div v-else-if="appStore.getAppSetting">
+          MMK
+          <span
+            >{{
+              (
+                item.active_prices[item.active_prices.length - 1].usd *
+                appStore.getAppSetting.usd_rate
+              ).toLocaleString()
+            }}
+            (1 USD =
+            {{ appStore.getAppSetting.usd_rate.toLocaleString() }} MMK)</span
+          >
+        </div>
         <div>
           USD
           <span>{{
@@ -153,6 +166,7 @@ import FileInput from "src/components/FileInput.vue";
 import { watch } from "vue";
 import useUtils from "src/composables/utils";
 import SelectInput from "src/components/SelectInput.vue";
+import { useAppStore } from "src/stores/app-store";
 
 const item = ref(null);
 const route = useRoute();
@@ -162,6 +176,8 @@ const { trimObject } = useUtils();
 
 const pictures = ref([]);
 const { buildForm } = useUtils();
+
+const appStore = useAppStore();
 
 const syncCategories = () => {
   api({
@@ -244,11 +260,11 @@ const removePrice = () => {
     api({
       method: "PUT",
       url: `prices/${price.id}`,
-      data: {
+      data: trimObject({
         mmk: price.mmk,
         usd: price.usd,
         active: false,
-      },
+      }),
     }).then(() => {
       item.value.active_prices = [];
     });

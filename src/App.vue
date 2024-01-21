@@ -34,5 +34,19 @@ onMounted(() => {
           name: "login",
         });
       });
+
+  api({
+    method: "GET",
+    url: "app-settings/1",
+  })
+    .then(({ data }) => {
+      appStore.setAppSetting(data);
+    })
+    .catch((e) => {
+      notify({
+        message: e.response?.data?.message || e.message,
+        type: "negative",
+      });
+    });
 });
 </script>
