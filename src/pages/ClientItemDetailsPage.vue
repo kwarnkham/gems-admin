@@ -1,7 +1,7 @@
 <template>
   <q-page v-if="item" class="column bg-black q-px-xs" :style-fn="vhPage">
     <q-carousel
-      height="280px"
+      height="200px"
       swipeable
       animated
       v-model="slide"
@@ -80,9 +80,6 @@
           </div>
         </div>
       </div>
-      <div class="text-h5 q-my-sm full-width text-white text-center">
-        Specification
-      </div>
       <div class="row text-white col justify-between q-px-md">
         <template v-for="key in Object.keys(item.specification)">
           <div
@@ -92,9 +89,17 @@
               !['created_at', 'updated_at', 'id', 'item_id'].includes(key)
             "
             class="spec col-6"
+            :class="{
+              'text-yellow-2': [
+                'carat_weight',
+                'color_grade',
+                'clarity_grade',
+                'cut_grade',
+              ].includes(key),
+            }"
           >
-            <div class="capitalize">{{ key }}</div>
-            <div class="text-weight-bolder">{{ item.specification[key] }}</div>
+            <div class="capitalize">{{ key.split("_").join(" ") }}</div>
+            <div class="text-weight-bold">{{ item.specification[key] }}</div>
           </div>
         </template>
       </div>
@@ -162,7 +167,6 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .spec {
-  font-size: 1.25em;
   margin: 3px 0;
 }
 .spotlight {

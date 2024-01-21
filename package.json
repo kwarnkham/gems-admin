@@ -2,7 +2,7 @@
   "name": "gems-admin",
   "version": "0.0.1",
   "description": "Admin for gems",
-  "productName": "Gems Admin",
+  "productName": "SBLAD",
   "author": "Moon <kwarnkham.moon@gmail.com>",
   "private": true,
   "scripts": {
