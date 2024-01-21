@@ -4,24 +4,17 @@
       <div class="text-center text-h5">Add Item Pictures</div>
       <div>Name : {{ item.name }}</div>
       <div>Description : {{ item.description }}</div>
-      <div v-if="item.specification?.carat">
-        Carat : {{ item.specification?.carat }}
-      </div>
-      <div v-if="item.specification?.cut">
-        Cut : {{ item.specification?.cut }}
-      </div>
-      <div v-if="item.specification?.color">
-        Color : {{ item.specification?.color }}
-      </div>
-      <div v-if="item.specification?.certification">
-        Certification : {{ item.specification?.certification }}
-      </div>
-      <div v-if="item.specification?.shape">
-        Shape : {{ item.specification?.shape }}
-      </div>
-      <div v-if="item.specification?.origin">
-        Origin : {{ item.specification?.origin }}
-      </div>
+      <template v-for="key in Object.keys(item.specification)" :key="key">
+        <div
+          v-if="
+            item.specification[key] &&
+            !['id', 'created_at', 'updated_at', 'item_id'].includes(key)
+          "
+          class="capitalize"
+        >
+          {{ key.split("_").join(" ") }} : {{ item.specification[key] }}
+        </div>
+      </template>
       <FileInput v-model="pictures" multiple v-slot="{ pickFiles }">
         <q-btn
           flat

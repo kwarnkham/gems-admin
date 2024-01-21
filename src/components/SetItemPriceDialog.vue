@@ -16,7 +16,6 @@
           <q-input
             outlined
             v-model="mmk"
-            required
             type="number"
             mode="numeric"
             pattern="[0-9]*"

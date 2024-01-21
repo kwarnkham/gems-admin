@@ -26,24 +26,17 @@
         })
       "
     />
-    <div v-if="item.specification?.carat">
-      Carat : {{ item.specification?.carat }}
-    </div>
-    <div v-if="item.specification?.cut">
-      Cut : {{ item.specification?.cut }}
-    </div>
-    <div v-if="item.specification?.color">
-      Color : {{ item.specification?.color }}
-    </div>
-    <div v-if="item.specification?.certification">
-      Certification : {{ item.specification?.certification }}
-    </div>
-    <div v-if="item.specification?.shape">
-      Shape : {{ item.specification?.shape }}
-    </div>
-    <div v-if="item.specification?.origin">
-      Origin : {{ item.specification?.origin }}
-    </div>
+    <template v-for="key in Object.keys(item.specification)" :key="key">
+      <div
+        v-if="
+          item.specification[key] &&
+          !['id', 'created_at', 'updated_at', 'item_id'].includes(key)
+        "
+        class="capitalize"
+      >
+        {{ key.split("_").join(" ") }} : {{ item.specification[key] }}
+      </div>
+    </template>
     <q-separator spaced />
     <div v-if="item.categories.length" class="q-gutter-x-sm q-mb-sm">
       <q-badge
@@ -72,7 +65,7 @@
     <q-separator spaced />
     <q-banner class="bg-primary text-white">
       <template v-if="item.active_prices?.length">
-        <div>
+        <div v-if="item.active_prices[item.active_prices.length - 1].mmk">
           MMK
           <span>{{
             item.active_prices[
@@ -165,6 +158,7 @@ const item = ref(null);
 const route = useRoute();
 const { notify, dialog } = useQuasar();
 const selectedCategories = ref([]);
+const { trimObject } = useUtils();
 
 const pictures = ref([]);
 const { buildForm } = useUtils();
@@ -268,7 +262,7 @@ const showSetPriceDialog = () => {
     api({
       method: "POST",
       url: "prices",
-      data: { ...price, item_id: item.value.id },
+      data: { ...trimObject(price), item_id: item.value.id },
     }).then(({ data }) => {
       item.value.active_prices.push(data);
     });

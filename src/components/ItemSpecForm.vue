@@ -3,12 +3,21 @@
     <div class="text-center text-h5">{{ title }}</div>
     <div>{{ item.name }}</div>
     <div>{{ item.description }}</div>
-    <q-input outlined label="Carat" v-model="carat" required />
-    <q-input outlined label="Cut" v-model="cut" />
-    <q-input outlined label="Clarity" v-model="clarity" />
-    <q-input outlined label="Color" v-model="color" />
-    <q-input outlined label="Certification" v-model="certification" />
     <q-input outlined label="Shape" v-model="shape" />
+    <q-input outlined label="Measurements" v-model="measurements" />
+    <q-input outlined label="Carat Weight" v-model="caratWeight" />
+    <q-input outlined label="Color Grade" v-model="colorGrade" />
+    <q-input outlined label="Clarity Grade" v-model="clarityGrade" />
+    <q-input outlined label="Cut Grade" v-model="cutGrade" />
+    <q-input outlined label="Polish" v-model="polish" />
+    <q-input outlined label="Symmetry" v-model="symmetry" />
+    <q-input outlined label="Fluorescence" v-model="fluorescence" />
+    <q-input
+      outlined
+      label="Clarity Characteristics"
+      v-model="clarityCharacteristics"
+    />
+    <q-input outlined label="Certification" v-model="certification" />
     <q-input outlined label="Origin" v-model="origin" />
     <div class="text-right">
       <q-btn glossy type="submit" label="Submit" no-caps />
@@ -39,26 +48,39 @@ const props = defineProps({
 });
 
 const { notify } = useQuasar();
-const carat = ref(props.item.specification?.carat ?? "");
-const cut = ref(props.item.specification?.cut ?? "");
-const clarity = ref(props.item.specification?.clarity ?? "");
-const color = ref(props.item.specification?.color ?? "");
+const polish = ref(props.item.specification?.polish ?? "");
+const symmetry = ref(props.item.specification?.symmetry ?? "");
+const fluorescence = ref(props.item.specification?.fluorescence ?? "");
+const clarityCharacteristics = ref(
+  props.item.specification?.clarity_characteristics ?? ""
+);
+const measurements = ref(props.item.specification?.measurements ?? "");
+const caratWeight = ref(props.item.specification?.carat_weight ?? "");
+const cutGrade = ref(props.item.specification?.cut_grade ?? "");
+const clarityGrade = ref(props.item.specification?.clarity_grade ?? "");
+const colorGrade = ref(props.item.specification?.color_grade ?? "");
 const certification = ref(props.item.specification?.certification ?? "");
 const origin = ref(props.item.specification?.origin ?? "");
 const shape = ref(props.item.specification?.shape ?? "");
+
 const router = useRouter();
 const { trimObject } = useUtils();
 
 const submit = () => {
   const data = {
     item_id: props.item.id,
-    carat: carat.value,
-    cut: cut.value,
-    clarity: clarity.value,
-    color: color.value,
+    shape: shape.value,
+    measurements: measurements.value,
+    carat_weight: caratWeight.value,
+    color_grade: colorGrade.value,
+    clarity_grade: clarityGrade.value,
+    cut_grade: cutGrade.value,
+    polish: polish.value,
+    symmetry: symmetry.value,
+    fluorescence: fluorescence.value,
+    clarity_characteristics: clarityCharacteristics.value,
     certification: certification.value,
     origin: origin.value,
-    shape: shape.value,
   };
   const options = {
     method: "POST",
