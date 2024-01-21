@@ -3,6 +3,8 @@
 3. preorder item
 4. schedule to clean up s3 space
 5. backup the project
+6. update app setting
+7. Profile pic for item
 
 # Goals
 

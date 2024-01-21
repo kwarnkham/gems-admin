@@ -1,6 +1,7 @@
 <template>
   <q-page v-if="item" class="column bg-black q-px-xs" :style-fn="vhPage">
     <q-carousel
+      v-if="item.pictures.length"
       height="200px"
       swipeable
       animated
@@ -112,7 +113,7 @@ import { useQuasar } from "quasar";
 import { api } from "src/boot/axios";
 import { ref } from "vue";
 import { onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import useApp from "src/composables/app";
 import { useAppStore } from "src/stores/app-store";
 import { computed } from "vue";
@@ -124,6 +125,7 @@ const fullscreen = ref(false);
 const { notify, dialog } = useQuasar();
 const { vhPage } = useApp();
 const appStore = useAppStore();
+const router = useRouter();
 
 const showDescription = () => {
   if (item.value.description)
@@ -154,7 +156,18 @@ onMounted(() => {
   })
     .then(({ data }) => {
       item.value = data;
-      if (data.pictures.length >= 0) slide.value = data.pictures[0].id;
+      if (data.pictures.length >= 0) slide.value = data.pictures[0]?.id || 1;
+      if (item.value.status == 2)
+        dialog({
+          title: "Out of stock",
+          message: "Item is not available at the moment",
+          noBackdropDismiss: true,
+          dark: true,
+        }).onOk(() => {
+          router.replace({
+            name: "client-item-list",
+          });
+        });
     })
     .catch((e) => {
       notify({

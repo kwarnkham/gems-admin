@@ -1,7 +1,11 @@
 <template>
-  <q-page padding v-if="item">
+  <q-page
+    padding
+    v-if="item"
+    :class="{ 'bg-dark text-white': item.status == 2 }"
+  >
     <q-btn
-      class="q-mb-xs"
+      class="q-mb-xs q-mr-sm"
       label="Edit info"
       no-caps
       @click="
@@ -9,6 +13,12 @@
           name: 'update-item',
         })
       "
+    />
+    <q-btn
+      class="q-mb-xs"
+      :icon="item.status == 1 ? 'visibility_off' : 'visibility'"
+      no-caps
+      @click="toggleStatus"
     />
     <div>Name : {{ item.name }}</div>
     <div>Description : {{ item.description }}</div>
@@ -207,6 +217,15 @@ const deletePicture = (id) => {
         1
       );
     });
+  });
+};
+
+const toggleStatus = () => {
+  api({
+    method: "POST",
+    url: `items/${item.value.id}/toggle-status`,
+  }).then(({ data }) => {
+    item.value.status = data.status;
   });
 };
 
