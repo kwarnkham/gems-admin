@@ -7,11 +7,11 @@ export const useAppStore = defineStore('app', {
   }),
 
   getters: {
-    getUser ({ user }) {
-      return user
+    getUser (state) {
+      return state.user
     },
-    getAppSetting ({ appSetting }) {
-      return appSetting
+    getAppSetting (state) {
+      return state.appSetting
     }
   },
 

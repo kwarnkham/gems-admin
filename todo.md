@@ -1,10 +1,8 @@
-1. Toggle item status
-2. Search item
-3. preorder item
-4. schedule to clean up s3 space
-5. backup the project
-6. update app setting
-7. Profile pic for item
+1. Search item
+2. preorder item
+3. schedule to clean up s3 space
+4. backup the project
+5. Profile pic for item
 
 # Goals
 

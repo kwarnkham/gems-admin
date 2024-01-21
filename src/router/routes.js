@@ -19,6 +19,13 @@ const routes = [
         }
       },
       {
+        path: 'settings', component: () => import('pages/SettingPage.vue'),
+        name: 'settings',
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
         path: 'contact/:id', component: () => import('pages/ContactDetailsPage.vue'),
         name: 'contact-details',
       },
