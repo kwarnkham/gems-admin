@@ -21,6 +21,11 @@
           <q-item-label> Settings</q-item-label>
         </q-item-section>
       </q-item>
+      <q-item clickable :to="{ name: 'client-home' }" v-ripple>
+        <q-item-section>
+          <q-item-label> Client Home </q-item-label>
+        </q-item-section>
+      </q-item>
     </q-list>
   </q-page>
 </template>
