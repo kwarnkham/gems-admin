@@ -76,12 +76,16 @@
               :label="'Contact for price'"
               icon="info"
               dense
+              @click.stop="dialMyNumber"
             >
             </q-btn>
           </div>
         </div>
       </div>
-      <div class="row text-white col justify-between q-px-md">
+      <div
+        class="row text-white col justify-between q-px-md"
+        v-if="item.specification"
+      >
         <template v-for="key in Object.keys(item.specification)">
           <div
             :key="key"
@@ -126,6 +130,7 @@ const { notify, dialog } = useQuasar();
 const { vhPage } = useApp();
 const appStore = useAppStore();
 const router = useRouter();
+const number = "+959452538242";
 
 const showDescription = () => {
   if (item.value.description)
@@ -133,6 +138,10 @@ const showDescription = () => {
       dark: true,
       message: item.value.description,
     });
+};
+
+const dialMyNumber = () => {
+  window.location.href = "tel:" + number;
 };
 
 const priceUpdateTime = computed(() => {

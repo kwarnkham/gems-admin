@@ -35,7 +35,7 @@
     </q-card>
     <div class="text-bold text-subtitle1 row items-center text-grey-4">
       You can also call us now
-      <q-btn icon="phone" flat color="green-14" @click="callMe" />
+      <q-btn icon="phone" flat color="green-14" @click="dialMyNumber" />
     </div>
   </q-page>
 </template>
@@ -86,7 +86,7 @@ const submit = () => {
     });
 };
 
-const callMe = () => {
+const dialMyNumber = () => {
   window.location.href = "tel:" + number;
 };
 
