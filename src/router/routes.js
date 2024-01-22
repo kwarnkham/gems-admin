@@ -108,6 +108,10 @@ const routes = [
         name: 'contact',
       },
       {
+        path: 'search', component: () => import('pages/SearchPage.vue'),
+        name: 'search',
+      },
+      {
         path: 'client-home', component: () => import('pages/ClientHomePage.vue'),
         name: 'client-home',
       },

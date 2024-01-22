@@ -47,7 +47,7 @@ export default function usePagination ({ url, params = { per_page: 10 }, append 
   }
 
   const updateQueryAndFetch = (newQuery) => {
-    const filters = { ...filters, ...newQuery }
+    filters = { ...filters, ...newQuery }
     if (currentPage.value == 1) fetch(filters)
     else currentPage.value = 1
   };
