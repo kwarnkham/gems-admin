@@ -159,6 +159,13 @@
             color="info"
             @click="deletePicture(picture.id)"
           />
+          <q-btn
+            round
+            class="absolute-top-left"
+            :label="picture.sort"
+            color="secondary"
+            @click="updateSort(picture)"
+          />
         </q-card-section>
       </q-card>
     </div>
@@ -189,6 +196,42 @@ const { buildForm } = useUtils();
 
 const appStore = useAppStore();
 
+const updateSort = (picture) => {
+  dialog({
+    title: "Update sorting",
+    prompt: {
+      model: picture.sort,
+      type: "number",
+      mode: "numeric",
+      pattern: "[0-9]*",
+      isValid: (val) => val > 0 && val != "" && !!val,
+    },
+  }).onOk((sort) => {
+    api({
+      method: "PUT",
+      url: `pictures/${picture.id}`,
+      data: {
+        sort,
+      },
+    })
+      .then(({ data }) => {
+        item.value.pictures.splice(
+          item.value.pictures.findIndex((e) => e.id == data.id),
+          1,
+          data
+        );
+        item.value.pictures = item.value.pictures.sort((a, b) => {
+          return b.sort - a.sort;
+        });
+      })
+      .catch((e) => {
+        notify({
+          message: e.response?.data?.message || e.message,
+          type: "negative",
+        });
+      });
+  });
+};
 const syncCategories = () => {
   api({
     url: `items/${item.value.id}/categories/sync`,
