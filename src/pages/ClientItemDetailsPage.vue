@@ -109,6 +109,14 @@
         </template>
       </div>
     </div>
+    <q-page-sticky :offset="[18, 18]">
+      <q-btn
+        icon="arrow_back"
+        @click="$router.go(-1)"
+        color="primary"
+        style="opacity: 0.5"
+      />
+    </q-page-sticky>
   </q-page>
 </template>
 
