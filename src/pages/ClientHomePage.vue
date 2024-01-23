@@ -46,7 +46,17 @@
         <q-img src="~/assets/clarity-tool.png" fit="contain" />
         <div class="text-center text-grey-2">CLARITY</div>
       </div>
-      <div class="col-6 q-pa-sm">
+      <div
+        class="col-6 q-pa-sm"
+        @click="
+          $router.push({
+            name: 'tool',
+            query: {
+              name: 'cut',
+            },
+          })
+        "
+      >
         <q-img src="~/assets/cut-tool.png" fit="contain" />
         <div class="text-center text-grey-2">CUT</div>
       </div>

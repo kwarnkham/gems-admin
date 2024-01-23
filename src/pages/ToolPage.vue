@@ -57,6 +57,29 @@
           "
         />
       </q-tab-panel>
+
+      <q-tab-panel
+        name="cut"
+        class="full-height column relative-position justify-end"
+      >
+        <q-img
+          v-for="cut in cutGrades"
+          :key="cut.label"
+          :src="getCutGradeImage(cut)"
+          class="cut-image absolute-center"
+          :class="{ 'z-max': cutGrade == cut.value }"
+          height="450px"
+          fit="contain"
+        />
+
+        <AppSlider
+          :min="1"
+          :max="cutGrades.length"
+          :step="1"
+          v-model="cutGrade"
+          :label-value="cutGrades.find((e) => e.value == cutGrade).label"
+        />
+      </q-tab-panel>
     </q-tab-panels>
   </q-page>
 </template>
@@ -71,16 +94,21 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 const tab = ref(route.query.name ?? "color");
 const { vhPage } = useApp();
-const { colorGrades, clarityGrades } = useSpec();
+const { colorGrades, clarityGrades, cutGrades } = useSpec();
 const colorGrade = ref(1);
 const clarityGrade = ref(1);
+const cutGrade = ref(1);
 
 const getColorGradeImage = (cGrade) => {
   return `/color-grade-${cGrade.label.toLowerCase()}.jpeg`;
 };
 
-const getClarityGradeImage = (cGrade) => {
-  return `/clarity-grade-${cGrade.label.toLowerCase()}.jpeg`;
+const getClarityGradeImage = (clarity) => {
+  return `/clarity-grade-${clarity.label.toLowerCase()}.jpeg`;
+};
+
+const getCutGradeImage = (cut) => {
+  return `/cut-grade-${cut.label.split(" ").join("-").toLowerCase()}.jpeg`;
 };
 </script>
 
@@ -91,5 +119,9 @@ const getClarityGradeImage = (cGrade) => {
 
 .scale-up:deep(.q-img__image) {
   transform: translate(0px, 55px) scale(2);
+}
+
+.cut-image {
+  clip-path: inset(70px 93px 257px 96px round 20px);
 }
 </style>

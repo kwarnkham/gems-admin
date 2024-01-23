@@ -34,7 +34,7 @@ export default function useSpec () {
   ]
 
   const cutGrades = [
-    { value: 1, label: "Excellence" },
+    { value: 1, label: "Excellent" },
     { value: 2, label: "Very Good" },
     { value: 3, label: "Good" },
     { value: 4, label: "Fair" },
