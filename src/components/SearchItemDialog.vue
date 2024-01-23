@@ -1,23 +1,42 @@
 <template>
   <q-dialog ref="dialogRef" @hide="onDialogHide" no-backdrop-dismiss dark>
     <q-card class="q-dialog-plugin">
+      <q-card-section>
+        <div class="text-center text-h6">Set you maximum</div>
+      </q-card-section>
       <q-form
-        @submit.prevent="onDialogOK({ cut, clarity, color, carat, price })"
+        @submit.prevent="
+          onDialogOK({ cutGrade, clarityGrade, colorGrade, carat, price })
+        "
       >
         <q-card-section class="q-gutter-y-sm">
           <q-input
             autofocus
             outlined
             v-model="carat"
-            required
             type="number"
             mode="numeric"
             pattern="[0-9]*"
             label="Carat"
           />
-          <q-input outlined v-model="color" label="Color" />
-          <q-input outlined v-model="cut" label="Cut" />
-          <q-input outlined v-model="clarity" label="Clarity" />
+          <q-select
+            outlined
+            label="Color Grade"
+            v-model="colorGrade"
+            :options="colorGrades"
+          />
+          <q-select
+            outlined
+            label="Clarity Grade"
+            v-model="clarityGrade"
+            :options="clarityGrades"
+          />
+          <q-select
+            outlined
+            label="Cut Grade"
+            v-model="cutGrade"
+            :options="cutGrades"
+          />
 
           <q-input
             outlined
@@ -44,6 +63,7 @@
 
 <script setup>
 import { useDialogPluginComponent } from "quasar";
+import useSpec from "src/composables/spec";
 import { ref } from "vue";
 
 const props = defineProps({
@@ -68,14 +88,16 @@ const props = defineProps({
     default: "",
   },
 });
-const cut = ref(props.propCut);
-const clarity = ref(props.propClarity);
+const cutGrade = ref(props.propCut);
+const clarityGrade = ref(props.propClarity);
 const carat = ref(props.propCarat);
-const color = ref(props.propColor);
+const colorGrade = ref(props.propColor);
 const price = ref(props.propPrice);
 
 defineEmits([...useDialogPluginComponent.emits]);
 
 const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } =
   useDialogPluginComponent();
+
+const { colorGrades, cutGrades, clarityGrades } = useSpec();
 </script>

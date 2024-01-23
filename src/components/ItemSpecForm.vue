@@ -5,10 +5,32 @@
     <div>{{ item.description }}</div>
     <q-input outlined label="Shape" v-model="shape" />
     <q-input outlined label="Measurements" v-model="measurements" />
-    <q-input outlined label="Carat Weight" v-model="caratWeight" />
-    <q-input outlined label="Color Grade" v-model="colorGrade" />
-    <q-input outlined label="Clarity Grade" v-model="clarityGrade" />
-    <q-input outlined label="Cut Grade" v-model="cutGrade" />
+    <q-input
+      outlined
+      label="Carat Weight"
+      v-model="caratWeight"
+      type="number"
+      mode="numeric"
+      pattern="[0-9]*"
+    />
+    <q-select
+      outlined
+      label="Color Grade"
+      v-model="colorGrade"
+      :options="colorGrades"
+    />
+    <q-select
+      outlined
+      label="Clarity Grade"
+      v-model="clarityGrade"
+      :options="clarityGrades"
+    />
+    <q-select
+      outlined
+      label="Cut Grade"
+      v-model="cutGrade"
+      :options="cutGrades"
+    />
     <q-input outlined label="Polish" v-model="polish" />
     <q-input outlined label="Symmetry" v-model="symmetry" />
     <q-input outlined label="Fluorescence" v-model="fluorescence" />
@@ -28,6 +50,7 @@
 <script setup>
 import { useQuasar } from "quasar";
 import { api } from "src/boot/axios";
+import useSpec from "src/composables/spec";
 import useUtils from "src/composables/utils";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
@@ -63,6 +86,8 @@ const certification = ref(props.item.specification?.certification ?? "");
 const origin = ref(props.item.specification?.origin ?? "");
 const shape = ref(props.item.specification?.shape ?? "");
 
+const { colorGrades, clarityGrades, cutGrades } = useSpec();
+
 const router = useRouter();
 const { trimObject } = useUtils();
 
@@ -72,9 +97,9 @@ const submit = () => {
     shape: shape.value,
     measurements: measurements.value,
     carat_weight: caratWeight.value,
-    color_grade: colorGrade.value,
-    clarity_grade: clarityGrade.value,
-    cut_grade: cutGrade.value,
+    color_grade: colorGrade.value.value,
+    clarity_grade: clarityGrade.value.value,
+    cut_grade: cutGrade.value.value,
     polish: polish.value,
     symmetry: symmetry.value,
     fluorescence: fluorescence.value,

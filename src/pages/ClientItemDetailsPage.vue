@@ -104,7 +104,27 @@
             }"
           >
             <div class="capitalize">{{ key.split("_").join(" ") }}</div>
-            <div class="text-weight-bold">{{ item.specification[key] }}</div>
+
+            <div class="text-weight-bold" v-if="key == 'color_grade'">
+              {{
+                colorGrades.find((e) => e.value == item.specification[key])
+                  .label
+              }}
+            </div>
+            <div class="text-weight-bold" v-else-if="key == 'cut_grade'">
+              {{
+                cutGrades.find((e) => e.value == item.specification[key]).label
+              }}
+            </div>
+            <div class="text-weight-bold" v-else-if="key == 'clarity_grade'">
+              {{
+                clarityGrades.find((e) => e.value == item.specification[key])
+                  .label
+              }}
+            </div>
+            <div class="text-weight-bold" v-else>
+              {{ item.specification[key] }}
+            </div>
           </div>
         </template>
       </div>
@@ -129,6 +149,7 @@ import { useRoute, useRouter } from "vue-router";
 import useApp from "src/composables/app";
 import { useAppStore } from "src/stores/app-store";
 import { computed } from "vue";
+import useSpec from "src/composables/spec";
 
 const route = useRoute();
 const item = ref(null);
@@ -138,6 +159,7 @@ const { notify, dialog } = useQuasar();
 const { vhPage } = useApp();
 const appStore = useAppStore();
 const router = useRouter();
+const { cutGrades, colorGrades, clarityGrades } = useSpec();
 const number = "+959452538242";
 
 const showDescription = () => {

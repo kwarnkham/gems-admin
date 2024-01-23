@@ -1,6 +1,7 @@
 import { onMounted, ref, watch } from "vue";
 import { api } from "src/boot/axios"
 import { useQuasar } from "quasar";
+import useUtils from "./utils";
 
 export default function usePagination ({ url, params = { per_page: 10 }, append = false }) {
   const pagination = ref(null);
@@ -8,6 +9,7 @@ export default function usePagination ({ url, params = { per_page: 10 }, append 
   const currentPage = ref(1);
   const fetching = ref(false)
   let filters = { ...params }
+  const { trimObject } = useUtils()
 
   const { notify } = useQuasar()
 
@@ -17,7 +19,7 @@ export default function usePagination ({ url, params = { per_page: 10 }, append 
       api({
         method: "GET",
         url,
-        params: filters,
+        params: trimObject(filters),
       }).then(response => {
         resolve(response)
       }).catch(error => {

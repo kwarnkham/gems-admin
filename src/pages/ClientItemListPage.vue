@@ -38,6 +38,7 @@ import usePagination from "src/composables/pagination";
 import SearchItemDialog from "src/components/SearchItemDialog.vue";
 import { ref } from "vue";
 import { watch } from "vue";
+import useUtils from "src/composables/utils";
 
 const { dialog } = useQuasar();
 const carat = ref("");
@@ -56,14 +57,15 @@ const { pagination, updateQueryAndFetch } = usePagination({
 
 watch([carat, clarity, price, cut, color], () => {
   pagination.value.data = [];
+  console.log(carat.value);
   updateQueryAndFetch({
     status: 1,
     per_page: 10,
     carat: carat.value,
-    clarity: clarity.value,
+    clarity: clarity.value.value,
     price: price.value,
-    cut: cut.value,
-    color: color.value,
+    cut: cut.value.value,
+    color: color.value.value,
   });
 });
 
@@ -78,10 +80,11 @@ const showSearchDialog = () => {
       propPrice: price.value,
     },
   }).onOk((spec) => {
+    console.log(spec);
     carat.value = spec.carat;
-    color.value = spec.color;
-    clarity.value = spec.clarity;
-    cut.value = spec.cut;
+    color.value = spec.colorGrade;
+    clarity.value = spec.clarityGrade;
+    cut.value = spec.cutGrade;
     price.value = spec.price;
   });
 };

@@ -12,7 +12,28 @@
           "
           class="capitalize"
         >
-          {{ key.split("_").join(" ") }} : {{ item.specification[key] }}
+          <span v-if="key == 'color_grade'">
+            {{ key.split("_").join(" ") }} :
+            {{
+              colorGrades.find((e) => item.specification[key] == e.value).label
+            }}
+          </span>
+          <span v-else-if="key == 'cut_grade'">
+            {{ key.split("_").join(" ") }} :
+            {{
+              cutGrades.find((e) => item.specification[key] == e.value).label
+            }}
+          </span>
+          <span v-else-if="key == 'clarity_grade'">
+            {{ key.split("_").join(" ") }} :
+            {{
+              clarityGrades.find((e) => item.specification[key] == e.value)
+                .label
+            }}
+          </span>
+          <span v-else>
+            {{ key.split("_").join(" ") }} : {{ item.specification[key] }}
+          </span>
         </div>
       </template>
       <FileInput v-model="pictures" multiple v-slot="{ pickFiles }">
@@ -59,6 +80,7 @@ import { useRoute, useRouter } from "vue-router";
 import FileInput from "src/components/FileInput.vue";
 import { watch } from "vue";
 import useUtils from "src/composables/utils";
+import useSpec from "src/composables/spec";
 
 const route = useRoute();
 const { notify, dialog } = useQuasar();
@@ -67,7 +89,7 @@ const pictures = ref([]);
 const previews = ref([]);
 const { buildForm } = useUtils();
 const router = useRouter();
-
+const { colorGrades, clarityGrades, cutGrades } = useSpec();
 const removePicture = (key) => {
   dialog({
     title: "Confirm",
