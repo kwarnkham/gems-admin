@@ -1,31 +1,40 @@
 <template>
   <div class="row no-wrap items-center q-gutter-x-md">
     <q-btn
-      icon="remove"
+      icon="keyboard_arrow_left"
       flat
-      @click="$emit('update:modelValue', modelValue - 1)"
+      @click="
+        $emit('update:modelValue', Number((modelValue - step).toFixed(1)))
+      "
       :disable="modelValue == min"
       rounded
       dense
+      color="white"
     />
     <q-slider
       :model-value="modelValue"
-      @update:model-value="$emit('update:modelValue', $event.target.value)"
+      @update:model-value="updateValue"
       :min="min"
       :max="max"
       :step="step"
       label
       label-always
-      color="primary"
+      label-color="primary"
+      color="white"
+      class="text-primary"
       :label-value="labelValue"
+      selection-color="transparent"
     />
     <q-btn
-      icon="add"
+      icon="keyboard_arrow_right"
       flat
-      @click="$emit('update:modelValue', modelValue + 1)"
+      @click="
+        $emit('update:modelValue', Number((modelValue + step).toFixed(1)))
+      "
       :disable="modelValue == max"
       rounded
       dense
+      color="white"
     />
   </div>
 </template>
@@ -55,4 +64,8 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["update:modelValue"]);
+
+const updateValue = (payload) => {
+  emit("update:modelValue", payload);
+};
 </script>

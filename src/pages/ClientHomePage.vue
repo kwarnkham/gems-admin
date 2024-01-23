@@ -60,7 +60,17 @@
         <q-img src="~/assets/cut-tool.png" fit="contain" />
         <div class="text-center text-grey-2">CUT</div>
       </div>
-      <div class="col-6 q-pa-sm">
+      <div
+        class="col-6 q-pa-sm"
+        @click="
+          $router.push({
+            name: 'tool',
+            query: {
+              name: 'carat',
+            },
+          })
+        "
+      >
         <q-img src="~/assets/carat-tool.png" fit="contain" />
         <div class="text-center text-grey-2">CARAT</div>
       </div>

@@ -1,7 +1,6 @@
-1. Search item
-2. preorder item
-3. schedule to clean up s3 space
-4. backup the project
+1. preorder item
+2. schedule to clean up s3 space
+3. backup the project
 
 # Goals
 

@@ -23,6 +23,11 @@
           height="450px"
           fit="contain"
         />
+        <div class="text-center q-mb-xl text-primary">
+          <q-chip>
+            {{ colorGrades.find((e) => e.value == colorGrade).grade }}
+          </q-chip>
+        </div>
 
         <AppSlider
           :min="1"
@@ -46,6 +51,12 @@
           height="450px"
           fit="contain"
         />
+
+        <div class="text-center q-mb-xl text-primary">
+          <q-chip>
+            {{ clarityGrades.find((e) => e.value == clarityGrade).grade }}
+          </q-chip>
+        </div>
 
         <AppSlider
           :min="1"
@@ -80,6 +91,38 @@
           :label-value="cutGrades.find((e) => e.value == cutGrade).label"
         />
       </q-tab-panel>
+
+      <q-tab-panel name="carat" class="full-height column">
+        <div class="row col justify-around rounded-borders bg-black">
+          <div class="col-5 column justify-center">
+            <q-img
+              src="/carat-grade.jpeg"
+              fit="contain"
+              style="transform: scale(0.2)"
+            />
+            <div class="text-white text-center">1.0 Carat</div>
+          </div>
+          <div class="col-5 column justify-center">
+            <q-img
+              src="/carat-grade.jpeg"
+              fit="contain"
+              :style="{
+                transform: 'scale(' + caratGrade / 50 + ')',
+              }"
+            />
+            <div class="text-white text-center">
+              {{ (caratGrade / 10).toFixed(1) }} Carat
+            </div>
+          </div>
+        </div>
+        <AppSlider
+          :min="1"
+          :max="50"
+          :step="1"
+          v-model="caratGrade"
+          :label-value="`${(caratGrade / 10).toFixed(1)} carat`"
+        />
+      </q-tab-panel>
     </q-tab-panels>
   </q-page>
 </template>
@@ -98,6 +141,7 @@ const { colorGrades, clarityGrades, cutGrades } = useSpec();
 const colorGrade = ref(1);
 const clarityGrade = ref(1);
 const cutGrade = ref(1);
+const caratGrade = ref(10);
 
 const getColorGradeImage = (cGrade) => {
   return `/color-grade-${cGrade.label.toLowerCase()}.jpeg`;
@@ -122,6 +166,6 @@ const getCutGradeImage = (cut) => {
 }
 
 .cut-image {
-  clip-path: inset(70px 93px 257px 96px round 20px);
+  clip-path: inset(70px 80px 257px 80px round 20px);
 }
 </style>
