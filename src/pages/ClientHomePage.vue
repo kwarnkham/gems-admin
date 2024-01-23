@@ -32,7 +32,17 @@
         <q-img src="~/assets/color-tool.png" fit="contain" />
         <div class="text-center text-grey-2">COLOR</div>
       </div>
-      <div class="col-6 q-pa-sm">
+      <div
+        class="col-6 q-pa-sm"
+        @click="
+          $router.push({
+            name: 'tool',
+            query: {
+              name: 'clarity',
+            },
+          })
+        "
+      >
         <q-img src="~/assets/clarity-tool.png" fit="contain" />
         <div class="text-center text-grey-2">CLARITY</div>
       </div>

@@ -24,39 +24,45 @@
           fit="contain"
         />
 
-        <div class="row no-wrap items-center">
-          <q-btn
-            icon="remove"
-            flat
-            @click="colorGrade -= 1"
-            :disable="colorGrade == 1"
-          />
-          <q-slider
-            v-model="colorGrade"
-            :min="1"
-            :max="colorGrades[colorGrades.length - 1].value"
-            :step="1"
-            label
-            label-always
-            color="primary"
-            :label-value="colorGrades.find((e) => e.value == colorGrade).label"
-          />
-          <q-btn
-            icon="add"
-            flat
-            @click="colorGrade += 1"
-            :disable="colorGrade == colorGrades[colorGrades.length - 1].value"
-          />
-        </div>
+        <AppSlider
+          :min="1"
+          :max="colorGrades.length"
+          :step="1"
+          v-model="colorGrade"
+          :label-value="colorGrades.find((e) => e.value == colorGrade).label"
+        />
       </q-tab-panel>
-      <q-tab-panel name="clarity">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+
+      <q-tab-panel
+        name="clarity"
+        class="full-height column relative-position justify-end"
+      >
+        <q-img
+          v-for="clarity in clarityGrades"
+          :key="clarity.label"
+          :src="getClarityGradeImage(clarity)"
+          class="image absolute-center scale-up"
+          :class="{ 'z-max': clarityGrade == clarity.value }"
+          height="450px"
+          fit="contain"
+        />
+
+        <AppSlider
+          :min="1"
+          :max="clarityGrades.length"
+          :step="1"
+          v-model="clarityGrade"
+          :label-value="
+            clarityGrades.find((e) => e.value == clarityGrade).label
+          "
+        />
       </q-tab-panel>
     </q-tab-panels>
   </q-page>
 </template>
 
 <script setup>
+import AppSlider from "src/components/AppSlider.vue";
 import useApp from "src/composables/app";
 import useSpec from "src/composables/spec";
 import { ref } from "vue";
@@ -65,16 +71,25 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 const tab = ref(route.query.name ?? "color");
 const { vhPage } = useApp();
-const { colorGrades } = useSpec();
+const { colorGrades, clarityGrades } = useSpec();
 const colorGrade = ref(1);
+const clarityGrade = ref(1);
 
 const getColorGradeImage = (cGrade) => {
   return `/color-grade-${cGrade.label.toLowerCase()}.jpeg`;
+};
+
+const getClarityGradeImage = (cGrade) => {
+  return `/clarity-grade-${cGrade.label.toLowerCase()}.jpeg`;
 };
 </script>
 
 <style scoped lang="scss">
 .image {
-  clip-path: circle(25% at 50% 35%);
+  clip-path: circle(104px at 50% 33%);
+}
+
+.scale-up:deep(.q-img__image) {
+  transform: translate(0px, 55px) scale(2);
 }
 </style>
