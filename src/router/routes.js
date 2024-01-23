@@ -104,6 +104,10 @@ const routes = [
         name: 'client-item-list',
       },
       {
+        path: 'tool', component: () => import('pages/ToolPage.vue'),
+        name: 'tool',
+      },
+      {
         path: 'contact', component: () => import('pages/ContactPage.vue'),
         name: 'contact',
       },

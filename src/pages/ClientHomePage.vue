@@ -17,8 +17,33 @@
         >Read more</q-btn
       >
     </div>
-    <div class="row">
-      <div class="q-pa-md"></div>
+    <div class="row justify-between">
+      <div
+        class="col-6 q-pa-sm"
+        @click="
+          $router.push({
+            name: 'tool',
+            query: {
+              name: 'color',
+            },
+          })
+        "
+      >
+        <q-img src="~/assets/color-tool.png" fit="contain" />
+        <div class="text-center text-grey-2">COLOR</div>
+      </div>
+      <div class="col-6 q-pa-sm">
+        <q-img src="~/assets/clarity-tool.png" fit="contain" />
+        <div class="text-center text-grey-2">CLARITY</div>
+      </div>
+      <div class="col-6 q-pa-sm">
+        <q-img src="~/assets/cut-tool.png" fit="contain" />
+        <div class="text-center text-grey-2">CUT</div>
+      </div>
+      <div class="col-6 q-pa-sm">
+        <q-img src="~/assets/carat-tool.png" fit="contain" />
+        <div class="text-center text-grey-2">CARAT</div>
+      </div>
     </div>
   </q-page>
 </template>
