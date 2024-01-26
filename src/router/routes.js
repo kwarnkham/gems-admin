@@ -12,6 +12,27 @@ const routes = [
         }
       },
       {
+        path: 'add-pre-order', component: () => import('pages/AddPreOrderPage.vue'),
+        name: 'add-pre-order',
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'pre-order/:id', component: () => import('pages/PreOrderDetailsPage.vue'),
+        name: 'pre-order-details',
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'pre-order-list', component: () => import('pages/PreOrderListPage.vue'),
+        name: 'pre-order-list',
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
         path: 'contacts', component: () => import('pages/ContactListPage.vue'),
         name: 'contacts',
         meta: {

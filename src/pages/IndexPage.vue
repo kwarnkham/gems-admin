@@ -16,6 +16,11 @@
           <q-item-label> Contacts</q-item-label>
         </q-item-section>
       </q-item>
+      <q-item clickable :to="{ name: 'pre-order-list' }" v-ripple>
+        <q-item-section>
+          <q-item-label> Pre-order</q-item-label>
+        </q-item-section>
+      </q-item>
       <q-item clickable :to="{ name: 'settings' }" v-ripple>
         <q-item-section>
           <q-item-label> Settings</q-item-label>

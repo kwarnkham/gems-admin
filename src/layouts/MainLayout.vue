@@ -12,8 +12,8 @@
           :class="{ invisible: $route.name == 'home' }"
         />
 
-        <q-toolbar-title @click="$router.push({ name: 'home' })">
-          Gems Admin
+        <q-toolbar-title>
+          <span @click="$router.push({ name: 'home' })">Gems Admin</span>
         </q-toolbar-title>
 
         <!-- <div>Quasar v{{ $q.version }}</div> -->
