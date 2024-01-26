@@ -12,6 +12,19 @@
         {{ key.split("_").join(" ") }} : {{ preOrder[key] }}
       </div>
     </template>
+    <q-page-sticky :offset="[18, 18]">
+      <q-btn
+        icon="edit"
+        @click="
+          $router.push({
+            name: 'update-pre-order',
+            params: preOrder.id,
+          })
+        "
+        color="primary"
+        style="opacity: 0.5"
+      />
+    </q-page-sticky>
   </q-page>
 </template>
 

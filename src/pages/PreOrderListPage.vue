@@ -50,6 +50,18 @@
     <div class="text-center full-width" v-if="fetching">
       <q-spinner-dots size="md" />
     </div>
+    <q-page-sticky :offset="[18, 18]">
+      <q-btn
+        icon="add"
+        @click="
+          $router.push({
+            name: 'add-pre-order',
+          })
+        "
+        color="primary"
+        style="opacity: 0.5"
+      />
+    </q-page-sticky>
   </q-page>
 </template>
 

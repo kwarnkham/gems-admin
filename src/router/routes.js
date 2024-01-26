@@ -26,6 +26,13 @@ const routes = [
         }
       },
       {
+        path: 'update-pre-order/:id', component: () => import('pages/UpdatePreOrderPage.vue'),
+        name: 'update-pre-order',
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
         path: 'pre-order-list', component: () => import('pages/PreOrderListPage.vue'),
         name: 'pre-order-list',
         meta: {
