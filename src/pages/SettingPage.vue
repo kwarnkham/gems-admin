@@ -21,7 +21,7 @@
 import { useQuasar } from "quasar";
 import { api } from "src/boot/axios";
 import { useAppStore } from "src/stores/app-store";
-import { watch } from "vue";
+import { onMounted } from "vue";
 import { ref } from "vue";
 
 const appStore = useAppStore();
@@ -40,6 +40,7 @@ const submit = () => {
   })
     .then(({ data }) => {
       setting.value = data;
+      appStore.setAppSetting(data);
       notify({
         message: "Updated",
         type: "positive",
@@ -53,11 +54,10 @@ const submit = () => {
       });
     });
 };
-watch(
-  () => appStore.getAppSetting,
-  () => {
-    if (appStore.getAppSetting != null)
-      setting.value = JSON.parse(JSON.stringify(appStore.getAppSetting));
-  }
-);
+
+onMounted(() => {
+  setTimeout(() => {
+    setting.value = JSON.parse(JSON.stringify(appStore.getAppSetting));
+  }, 500);
+});
 </script>
