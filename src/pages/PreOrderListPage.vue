@@ -6,6 +6,12 @@
     class="row content-baseline"
   >
     <div
+      class="text-right full-width"
+      v-if="Object.keys(route.query).length > 0"
+    >
+      <q-icon name="filter_alt" />
+    </div>
+    <div
       class="q-pa-sm col-12"
       v-for="preOrder in pagination.data"
       :key="preOrder.id"
@@ -69,10 +75,12 @@
 import { debounce } from "quasar";
 import usePagination from "src/composables/pagination";
 import useUtil from "src/composables/utils";
+import { useRoute } from "vue-router";
 
+const route = useRoute();
 const { pagination, currentPage, fetching } = usePagination({
   url: "pre-orders",
-  params: { per_page: 10 },
+  params: { per_page: 10, contact_id: route.query.contact_id },
   append: true,
 });
 

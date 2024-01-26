@@ -13,17 +13,37 @@
       </div>
     </template>
     <q-page-sticky :offset="[18, 18]">
-      <q-btn
-        icon="edit"
-        @click="
-          $router.push({
-            name: 'update-pre-order',
-            params: preOrder.id,
-          })
-        "
+      <q-fab
+        icon="keyboard_arrow_up"
+        direction="up"
         color="primary"
         style="opacity: 0.5"
-      />
+      >
+        <q-fab-action
+          color="primary"
+          icon="edit"
+          @click="
+            $router.push({
+              name: 'update-pre-order',
+              params: {
+                id: preOrder.id,
+              },
+            })
+          "
+        />
+        <q-fab-action
+          color="secondary"
+          @click="
+            $router.push({
+              name: 'contact-details',
+              params: {
+                id: preOrder.contact_id,
+              },
+            })
+          "
+          icon="person"
+        />
+      </q-fab>
     </q-page-sticky>
   </q-page>
 </template>

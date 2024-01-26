@@ -2,7 +2,8 @@
   <q-page padding v-if="contact" :style-fn="vhPage" class="column bg-grey-4">
     <div class="text-h6 text-center q-gutter-x-sm q-mb-sm">
       <q-btn no-caps flat @click="makeCall">
-        {{ contact.name }} : {{ contact.phone }}
+        <q-icon name="person" />{{ contact.name }} :<q-icon name="phone" />
+        {{ contact.phone }}
       </q-btn>
       <q-btn icon="add" round color="primary" push @click="addMeet" />
     </div>
@@ -26,6 +27,22 @@
       </q-card>
     </div>
     <div class="text-center" v-else>You've never met this contact yet</div>
+    <q-page-sticky :offset="[18, 18]">
+      <q-btn
+        label="Pre Orders"
+        color="primary"
+        style="opacity: 0.5"
+        no-caps
+        @click="
+          $router.push({
+            name: 'pre-order-list',
+            query: {
+              contact_id: contact.id,
+            },
+          })
+        "
+      />
+    </q-page-sticky>
   </q-page>
 </template>
 
