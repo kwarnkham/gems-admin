@@ -1,5 +1,14 @@
 <template>
   <q-page padding v-if="preOrder">
+    <div class="row justify-end">
+      <q-btn
+        label="Complete"
+        no-caps
+        flat
+        @click="updateOrderStatus(3)"
+        :disable="preOrder.status == 3"
+      />
+    </div>
     <template v-for="key in Object.keys(preOrder)" :key="key">
       <div
         class="capitalize"
@@ -22,6 +31,7 @@
         <q-fab-action
           color="primary"
           icon="edit"
+          :disable="preOrder.status == 3"
           @click="
             $router.push({
               name: 'update-pre-order',
@@ -57,8 +67,33 @@ import { useRoute } from "vue-router";
 
 const route = useRoute();
 const preOrder = ref(null);
-const { notify } = useQuasar;
+const { notify, dialog } = useQuasar();
 
+const updateOrderStatus = (status) => {
+  dialog({
+    title: "Confirm",
+    message: "Are you sure?",
+    cancel: true,
+    noBackdropDismiss: true,
+  }).onOk(() => {
+    api({
+      method: "POST",
+      url: `pre-orders/${preOrder.value.id}/status`,
+      data: {
+        status,
+      },
+    })
+      .then(({ data }) => {
+        preOrder.value.status = data.status;
+      })
+      .catch((e) => {
+        notify({
+          message: e.response?.data?.message || e.message,
+          type: "negative",
+        });
+      });
+  });
+};
 onMounted(() => {
   api({
     method: "GET",

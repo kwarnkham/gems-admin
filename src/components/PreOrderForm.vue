@@ -1,13 +1,13 @@
 <template>
   <q-form @submit.prevent="submit" class="q-gutter-y-sm">
     <div class="text-center text-6">Pre Order</div>
-    <q-input label="Name" v-model="name" required :disable="name != ''" />
+    <q-input label="Name" v-model="name" required :disable="preOrder != null" />
     <q-input
       label="Phone"
       v-model="phone"
       required
       type="tel"
-      :disable="phone != ''"
+      :disable="preOrder != null"
     />
     <q-input label="Category" v-model="category" required />
     <q-input
@@ -41,7 +41,7 @@
     <q-select outlined label="Cut Grade" v-model="cut" :options="cutGrades" />
     <q-input label="Shape" v-model="shape" required />
     <div class="text-right">
-      <q-btn icon="save" glossy type="submit" />
+      <q-btn icon="save" glossy type="submit" :disable="preOrder.status == 3" />
     </div>
   </q-form>
 </template>
