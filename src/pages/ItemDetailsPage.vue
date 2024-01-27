@@ -203,7 +203,7 @@ const updateSort = (picture) => {
       model: picture.sort,
       type: "number",
       mode: "numeric",
-      pattern: "[0-9]*",
+      pattern: "\d*",
       isValid: (val) => val > 0 && val != "" && !!val,
     },
   }).onOk((sort) => {

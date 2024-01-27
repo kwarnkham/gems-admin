@@ -10,7 +10,7 @@
             required
             type="number"
             mode="numeric"
-            pattern="[0-9]*"
+            pattern="\d*"
             label="USD"
           />
           <q-input
@@ -18,7 +18,7 @@
             v-model="mmk"
             type="number"
             mode="numeric"
-            pattern="[0-9]*"
+            pattern="\d*"
             label="MMK"
           />
         </q-card-section>

@@ -16,7 +16,7 @@
       required
       type="number"
       mode="numeric"
-      pattern="[0-9]*"
+      pattern="\d*"
     />
     <q-input
       label="Carat"
@@ -24,7 +24,7 @@
       required
       type="number"
       mode="numeric"
-      pattern="[0-9]*"
+      pattern="\d*"
     />
     <q-select
       outlined

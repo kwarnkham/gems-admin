@@ -11,7 +11,7 @@
       v-model="caratWeight"
       type="number"
       mode="numeric"
-      pattern="[0-9]*"
+      pattern="\d*"
     />
     <q-select
       outlined

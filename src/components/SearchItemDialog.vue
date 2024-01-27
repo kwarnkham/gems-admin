@@ -16,7 +16,7 @@
             v-model="carat"
             type="number"
             mode="numeric"
-            pattern="[0-9]*"
+            pattern="\d*"
             label="Carat"
           />
           <q-select
@@ -43,7 +43,7 @@
             v-model="price"
             type="number"
             mode="numeric"
-            pattern="[0-9]*"
+            pattern="\d*"
             label="Price"
           />
         </q-card-section>
