@@ -44,7 +44,23 @@
         "
         class="capitalize"
       >
-        {{ key.split("_").join(" ") }} : {{ item.specification[key] }}
+        <span>{{ key.split("_").join(" ") }}</span> :
+        <span class="text-weight-bold" v-if="key == 'color_grade'">
+          {{
+            colorGrades.find((e) => e.value == item.specification[key]).label
+          }}
+        </span>
+        <span class="text-weight-bold" v-else-if="key == 'cut_grade'">
+          {{ cutGrades.find((e) => e.value == item.specification[key]).label }}
+        </span>
+        <span class="text-weight-bold" v-else-if="key == 'clarity_grade'">
+          {{
+            clarityGrades.find((e) => e.value == item.specification[key]).label
+          }}
+        </span>
+        <span class="text-weight-bold" v-else>
+          {{ item.specification[key] }}
+        </span>
       </div>
     </template>
     <q-separator spaced />
