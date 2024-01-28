@@ -36,7 +36,7 @@
         })
       "
     />
-    <template v-for="key in Object.keys(item.specification)" :key="key">
+    <template v-for="key in Object.keys(item.specification ?? {})" :key="key">
       <div
         v-if="
           item.specification[key] &&
@@ -200,12 +200,14 @@ import { watch } from "vue";
 import useUtils from "src/composables/utils";
 import SelectInput from "src/components/SelectInput.vue";
 import { useAppStore } from "src/stores/app-store";
+import useSpec from "src/composables/spec";
 
 const item = ref(null);
 const route = useRoute();
 const { notify, dialog } = useQuasar();
 const selectedCategories = ref([]);
 const { trimObject } = useUtils();
+const { colorGrades, clarityGrades, cutGrades } = useSpec();
 
 const pictures = ref([]);
 const { buildForm } = useUtils();

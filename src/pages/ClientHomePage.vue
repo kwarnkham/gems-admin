@@ -5,7 +5,7 @@
       <div class="text-weight-bold text-subtitle1">THE 4Cs OF</div>
       <div class="text-weight-bolder text-h5">Diamond Quality</div>
       <div class="text-overline">
-        The universal method for assessing the quality of any diamond, anywhwre
+        The universal method for assessing the quality of any diamond, anywhere
         in the word.
       </div>
       <q-btn
