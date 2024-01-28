@@ -15,8 +15,8 @@
             outlined
             v-model="carat"
             type="number"
-            mode="numeric"
-            pattern="\d*"
+            inputmode="numeric"
+            pattern="\d+(\.\d+)?"
             label="Carat"
           />
           <q-select
@@ -42,8 +42,8 @@
             outlined
             v-model="price"
             type="number"
-            mode="numeric"
-            pattern="\d*"
+            inputmode="numeric"
+            pattern="\d+(\.\d+)?"
             label="Price"
           />
         </q-card-section>

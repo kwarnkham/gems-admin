@@ -9,9 +9,9 @@
       outlined
       label="Carat Weight"
       v-model="caratWeight"
-      type="number"
-      mode="numeric"
-      pattern="\d*"
+      type="text"
+      inputmode="numeric"
+      pattern="\d+(\.\d+)?"
     />
     <q-select
       outlined

@@ -15,16 +15,16 @@
       v-model="price"
       required
       type="number"
-      mode="numeric"
-      pattern="\d*"
+      inputmode="numeric"
+      pattern="\d+(\.\d+)?"
     />
     <q-input
       label="Carat"
       v-model="carat"
       required
       type="number"
-      mode="numeric"
-      pattern="\d*"
+      inputmode="numeric"
+      pattern="\d+(\.\d+)?"
     />
     <q-select
       outlined

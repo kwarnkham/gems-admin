@@ -9,16 +9,16 @@
             v-model="usd"
             required
             type="number"
-            mode="numeric"
-            pattern="\d*"
+            inputmode="numeric"
+            pattern="\d+(\.\d+)?"
             label="USD"
           />
           <q-input
             outlined
             v-model="mmk"
             type="number"
-            mode="numeric"
-            pattern="\d*"
+            inputmode="numeric"
+            pattern="\d+(\.\d+)?"
             label="MMK"
           />
         </q-card-section>
