@@ -26,19 +26,22 @@
         </q-img>
       </q-card>
     </div>
-    <q-page-sticky :offset="[18, 18]">
-      <q-btn icon="search" round color="info" @click="showSearchDialog" />
-    </q-page-sticky>
+    <FloatingActionButton
+      icon="search"
+      color="info"
+      @click="showSearchDialog"
+      :opacity="0.7"
+    />
   </q-page>
 </template>
 
 <script setup>
+import FloatingActionButton from "src/components/FloatingActionButton.vue";
 import { useQuasar } from "quasar";
 import usePagination from "src/composables/pagination";
 import SearchItemDialog from "src/components/SearchItemDialog.vue";
 import { ref } from "vue";
 import { watch } from "vue";
-import useUtils from "src/composables/utils";
 
 const { dialog } = useQuasar();
 const carat = ref("");

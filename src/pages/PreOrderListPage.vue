@@ -56,23 +56,21 @@
     <div class="text-center full-width" v-if="fetching">
       <q-spinner-dots size="md" />
     </div>
-    <q-page-sticky :offset="[18, 18]">
-      <q-btn
-        icon="add"
-        @click="
-          $router.push({
-            name: 'add-pre-order',
-          })
-        "
-        color="primary"
-        style="opacity: 0.5"
-      />
-    </q-page-sticky>
+
+    <FloatingActionButton
+      icon="add"
+      @click="
+        $router.push({
+          name: 'add-pre-order',
+        })
+      "
+    />
   </q-page>
 </template>
 
 <script setup>
 import { debounce } from "quasar";
+import FloatingActionButton from "src/components/FloatingActionButton.vue";
 import usePagination from "src/composables/pagination";
 import useUtil from "src/composables/utils";
 import { useRoute } from "vue-router";

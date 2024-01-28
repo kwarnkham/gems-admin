@@ -27,26 +27,23 @@
       </q-card>
     </div>
     <div class="text-center" v-else>You've never met this contact yet</div>
-    <q-page-sticky :offset="[18, 18]">
-      <q-btn
-        label="Pre Orders"
-        color="primary"
-        style="opacity: 0.5"
-        no-caps
-        @click="
-          $router.push({
-            name: 'pre-order-list',
-            query: {
-              contact_id: contact.id,
-            },
-          })
-        "
-      />
-    </q-page-sticky>
+    <FloatingActionButton
+      @click="
+        $router.push({
+          name: 'pre-order-list',
+          query: {
+            contact_id: contact.id,
+          },
+        })
+      "
+      label="Pre Order"
+      no-caps
+    />
   </q-page>
 </template>
 
 <script setup>
+import FloatingActionButton from "src/components/FloatingActionButton.vue";
 import { useQuasar } from "quasar";
 import { api } from "src/boot/axios";
 import useApp from "src/composables/app";

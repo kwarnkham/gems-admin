@@ -41,7 +41,12 @@
     <q-select outlined label="Cut Grade" v-model="cut" :options="cutGrades" />
     <q-input label="Shape" v-model="shape" required />
     <div class="text-right">
-      <q-btn icon="save" glossy type="submit" :disable="preOrder.status == 3" />
+      <q-btn
+        icon="save"
+        glossy
+        type="submit"
+        :disable="preOrder?.status == 3"
+      />
     </div>
   </q-form>
 </template>

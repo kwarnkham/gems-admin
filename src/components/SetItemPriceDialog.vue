@@ -8,7 +8,7 @@
             outlined
             v-model="usd"
             required
-            type="number"
+            type="text"
             inputmode="numeric"
             pattern="\d+(\.\d+)?"
             label="USD"
@@ -16,7 +16,7 @@
           <q-input
             outlined
             v-model="mmk"
-            type="number"
+            type="text"
             inputmode="numeric"
             pattern="\d+(\.\d+)?"
             label="MMK"

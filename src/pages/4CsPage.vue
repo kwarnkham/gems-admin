@@ -37,16 +37,12 @@
       </p>
     </div>
 
-    <q-page-sticky :offset="[18, 18]">
-      <q-btn
-        icon="arrow_back"
-        @click="$router.go(-1)"
-        color="primary"
-        style="opacity: 0.5"
-      />
-    </q-page-sticky>
+    <FloatingActionButton @click="$router.go(-1)" icon="arrow_back" />
   </q-page>
 </template>
+<script setup>
+import FloatingActionButton from "src/components/FloatingActionButton.vue";
+</script>
 
 <style scoped lang="scss">
 p {

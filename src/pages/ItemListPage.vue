@@ -30,11 +30,16 @@
     <div class="text-center full-width" v-if="fetching">
       <q-spinner-dots size="md" />
     </div>
+    <FloatingActionButton
+      @click="$router.push({ name: 'add-item' })"
+      icon="add"
+    />
   </q-page>
 </template>
 
 <script setup>
 import { debounce } from "quasar";
+import FloatingActionButton from "src/components/FloatingActionButton.vue";
 import usePagination from "src/composables/pagination";
 import useUtil from "src/composables/utils";
 
