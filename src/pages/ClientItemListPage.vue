@@ -65,19 +65,19 @@ const showSearchDialog = () => {
   dialog({
     component: SearchItemDialog,
   }).onOk((spec) => {
-    localStorage.set("caratSearch", spec.carat);
-    localStorage.set("colorSearch", spec.colorGrade);
-    localStorage.set("claritySearch", spec.clarityGrade);
-    localStorage.set("cutSearch", spec.cutGrade);
-    localStorage.set("priceSearch", spec.price);
+    if (spec.carat) localStorage.set("caratSearch", spec.carat);
+    if (spec.colorGrade) localStorage.set("colorSearch", spec.colorGrade);
+    if (spec.clarityGrade) localStorage.set("claritySearch", spec.clarityGrade);
+    if (spec.cutGrade) localStorage.set("cutSearch", spec.cutGrade);
+    if (spec.price) localStorage.set("priceSearch", spec.price);
     pagination.value.data = [];
     updateQueryAndFetch({
       ...params,
       carat: spec.carat,
-      clarity: spec.clarityGrade.value,
+      clarity: spec.clarityGrade?.value,
       price: spec.price,
-      cut: spec.cutGrade.value,
-      color: spec.colorGrade.value,
+      cut: spec.cutGrade?.value,
+      color: spec.colorGrade?.value,
     });
   });
 };

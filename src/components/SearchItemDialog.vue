@@ -49,6 +49,7 @@
           />
         </q-card-section>
         <q-card-actions align="right">
+          <q-btn color="primary" icon="sym_o_mop" @click="clear" no-caps />
           <q-btn
             color="primary"
             :label="$t('cancel')"
@@ -74,6 +75,28 @@ const clarityGrade = ref(localStorage.getItem("claritySearch") ?? null);
 const carat = ref(localStorage.getItem("caratSearch") ?? "");
 const colorGrade = ref(localStorage.getItem("colorSearch") ?? null);
 const price = ref(localStorage.getItem("priceSearch") ?? "");
+
+const clear = () => {
+  localStorage.remove("cutSearch");
+  localStorage.remove("claritySearch");
+  localStorage.remove("caratSearch");
+  localStorage.remove("colorSearch");
+  localStorage.remove("priceSearch");
+
+  cutGrade.value = null;
+  clarityGrade.value = null;
+  carat.value = "";
+  colorGrade.value = null;
+  price.value = "";
+
+  onDialogOK({
+    cutGrade: cutGrade.value,
+    clarityGrade: clarityGrade.value,
+    colorGrade: colorGrade.value,
+    carat: carat.value,
+    price: price.value,
+  });
+};
 
 defineEmits([...useDialogPluginComponent.emits]);
 
