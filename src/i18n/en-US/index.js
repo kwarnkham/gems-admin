@@ -9,4 +9,9 @@ export default {
   faint: 'Faint',
   veryLight: 'Very light',
   light: 'Light',
+  name: 'Name',
+  phone: 'Phone',
+  message: "Message",
+  we_will_contact_you_shortly: "We will contact you shortly",
+  you_can_also_call_us_now: "You can also call us now"
 }

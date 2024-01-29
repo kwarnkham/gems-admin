@@ -2,17 +2,24 @@
   <q-page padding class="flex flex-center">
     <q-img src="~/assets/logo-color.jpeg" class="rounded-borders" />
     <q-form @submit.prevent="submit" class="form">
-      <div class="text-center text-h6">We will contact you shortly</div>
-      <q-input label="Name" required v-model="name" :disable="disableForm" />
+      <div class="text-center text-h6">
+        {{ $t("we_will_contact_you_shortly") }}
+      </div>
       <q-input
-        label="Phone"
+        :label="$t('name')"
+        required
+        v-model="name"
+        :disable="disableForm"
+      />
+      <q-input
+        :label="$t('phone')"
         required
         v-model="phone"
         type="tel"
         :disable="disableForm"
       />
       <q-input
-        label="Your Message"
+        :label="$t('message')"
         v-model="message"
         autogrow
         :disable="disableForm"
@@ -34,7 +41,7 @@
       </q-card-actions>
     </q-card>
     <div class="text-bold text-subtitle1 row items-center text-grey-4">
-      You can also call us now
+      {{ $t("you_can_also_call_us_now") }}
       <q-btn icon="phone" flat color="green-14" @click="dialMyNumber" />
     </div>
   </q-page>

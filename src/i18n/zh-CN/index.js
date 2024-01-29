@@ -9,4 +9,9 @@ export default {
   faint: 'Faint',
   veryLight: 'Very light',
   light: 'Light',
+  name: '姓名',
+  phone: '电话号码',
+  message: "笔记",
+  we_will_contact_you_shortly: "我们会尽快与您联系",
+  you_can_also_call_us_now: "您也可以立即致电我们"
 }
