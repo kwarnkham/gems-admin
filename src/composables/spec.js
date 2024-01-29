@@ -1,4 +1,8 @@
+import { computed } from "vue"
+import { useI18n } from "vue-i18n"
+
 export default function useSpec () {
+  const { t } = useI18n()
   const clarityGrades = [
     { value: 1, label: "FL", grade: "Flawless" },
     { value: 2, label: "IF", grade: "Internally Flawless" },
@@ -13,25 +17,25 @@ export default function useSpec () {
     { value: 11, label: "I3", grade: "Included" },
   ]
 
-  const colorGrades = [
-    { value: 1, label: "D", grade: "Colorless" },
-    { value: 2, label: "E", grade: "Colorless" },
-    { value: 3, label: "F", grade: "Colorless" },
-    { value: 4, label: "G", grade: "Near Colorless" },
-    { value: 5, label: "H", grade: "Near Colorless" },
-    { value: 6, label: "I", grade: "Near Colorless" },
-    { value: 7, label: "J", grade: "Near Colorless" },
-    { value: 8, label: "K", grade: "Faint" },
-    { value: 9, label: "L", grade: "Faint" },
-    { value: 10, label: "M", grade: "Faint" },
-    { value: 11, label: "N", grade: "Very Light" },
-    { value: 12, label: "O-P", grade: "Very Light" },
-    { value: 13, label: "Q-R", grade: "Very Light" },
-    { value: 14, label: "S-T", grade: "Light" },
-    { value: 15, label: "U-V", grade: "Light" },
-    { value: 16, label: "W-X", grade: "Light" },
-    { value: 17, label: "Y-Z", grade: "Light" },
-  ]
+  const colorGrades = computed(() => [
+    { value: 1, label: "D", grade: t('colorless') },
+    { value: 2, label: "E", grade: t('colorless') },
+    { value: 3, label: "F", grade: t('colorless') },
+    { value: 4, label: "G", grade: t('nearColorless') },
+    { value: 5, label: "H", grade: t('nearColorless') },
+    { value: 6, label: "I", grade: t('nearColorless') },
+    { value: 7, label: "J", grade: t('nearColorless') },
+    { value: 8, label: "K", grade: t('faint') },
+    { value: 9, label: "L", grade: t('faint') },
+    { value: 10, label: "M", grade: t('faint') },
+    { value: 11, label: "N", grade: t('veryLight') },
+    { value: 12, label: "O-P", grade: t('veryLight') },
+    { value: 13, label: "Q-R", grade: t('veryLight') },
+    { value: 14, label: "S-T", grade: t('light') },
+    { value: 15, label: "U-V", grade: t('light') },
+    { value: 16, label: "W-X", grade: t('light') },
+    { value: 17, label: "Y-Z", grade: t('light') },
+  ])
 
   const cutGrades = [
     { value: 1, label: "Excellent" },

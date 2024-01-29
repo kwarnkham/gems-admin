@@ -6,7 +6,7 @@ import { useRoute } from "vue-router";
 
 export default function useLocale () {
   const route = useRoute()
-  const { lang } = useQuasar();
+  const { lang, localStorage } = useQuasar();
   const { locale } = useI18n({ useScope: "global" });
   const language = ref(lang.isoName);
   const appLanguages = languages.filter((lang) =>
@@ -26,6 +26,7 @@ export default function useLocale () {
         (imported) => {
           lang.set(imported.default);
           locale.value = language.value;
+          localStorage.set('locale', locale.value)
         }
       );
     } catch (err) {
@@ -34,8 +35,10 @@ export default function useLocale () {
   });
 
   onMounted(() => {
+    const localLocale = localStorage.getItem('locale')
     const queryLocale = route.query.locale
     if (queryLocale && langOptions.find(e => e.value == queryLocale) != null) language.value = queryLocale
+    else if (localLocale && langOptions.find(e => e.value == localLocale) != null) language.value = localLocale
   })
 
 

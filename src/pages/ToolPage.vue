@@ -1,10 +1,10 @@
 <template>
   <q-page padding class="column" :style-fn="vhPage">
     <q-tabs v-model="tab" class="text-grey-1" active-color="warning">
-      <q-tab name="color" label="color" />
-      <q-tab name="clarity" label="clarity" />
-      <q-tab name="cut" label="cut" />
-      <q-tab name="carat" label="carat" />
+      <q-tab name="color" :label="$t('color')" />
+      <q-tab name="clarity" :label="$t('clarity')" />
+      <q-tab name="cut" :label="$t('cut')" />
+      <q-tab name="carat" :label="$t('carat')" />
     </q-tabs>
 
     <q-separator />
@@ -19,7 +19,7 @@
           :key="cGrade.label"
           :src="getColorGradeImage(cGrade)"
           class="image absolute-center"
-          :class="{ 'z-max': colorGrade == cGrade.value }"
+          :class="{ 'z-1': colorGrade == cGrade.value }"
           height="450px"
           fit="contain"
         />
@@ -47,7 +47,7 @@
           :key="clarity.label"
           :src="getClarityGradeImage(clarity)"
           class="image absolute-center scale-up"
-          :class="{ 'z-max': clarityGrade == clarity.value }"
+          :class="{ 'z-1': clarityGrade == clarity.value }"
           height="450px"
           fit="contain"
         />
@@ -78,7 +78,7 @@
           :key="cut.label"
           :src="getCutGradeImage(cut)"
           class="cut-image absolute-center"
-          :class="{ 'z-max': cutGrade == cut.value }"
+          :class="{ 'z-1': cutGrade == cut.value }"
           height="450px"
           fit="contain"
         />
