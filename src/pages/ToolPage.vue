@@ -1,6 +1,10 @@
 <template>
   <q-page padding class="column" :style-fn="vhPage">
-    <q-tabs v-model="tab" class="text-grey-1" active-color="warning">
+    <q-tabs
+      v-model="tab"
+      class="text-grey-1 overflow-auto full-width"
+      active-color="warning"
+    >
       <q-tab name="color" :label="$t('color')" />
       <q-tab name="clarity" :label="$t('clarity')" />
       <q-tab name="cut" :label="$t('cut')" />
