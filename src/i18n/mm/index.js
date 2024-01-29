@@ -13,5 +13,17 @@ export default {
   phone: 'ဖုန်းနံပါတ်',
   message: "မှတ်ချက်",
   we_will_contact_you_shortly: "မကြာမှီ ဆက်သွယ်ပေးမည်",
-  you_can_also_call_us_now: "ယခုခေါ်ဆိုရန်"
+  you_can_also_call_us_now: "ယခုခေါ်ဆိုရန်",
+  shape: 'Shape',
+  measurements: 'Measurements',
+  caratWeight: 'Carat weight',
+  colorGrade: 'Color grade',
+  cutGrade: "Cut grade",
+  clarityGrade: 'Clarity grade',
+  polish: 'Polish',
+  symmetry: "Symmetry",
+  fluorescence: "Fluorescence",
+  clarityCharacteristics: "Clarity Characteristics",
+  certification: "Certification",
+  origin: "Origin"
 }

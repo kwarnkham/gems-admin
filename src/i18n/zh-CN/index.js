@@ -13,5 +13,17 @@ export default {
   phone: '电话号码',
   message: "笔记",
   we_will_contact_you_shortly: "我们会尽快与您联系",
-  you_can_also_call_us_now: "您也可以立即致电我们"
+  you_can_also_call_us_now: "您也可以立即致电我们",
+  shape: '形状',
+  measurements: '尺寸',
+  caratWeight: '克拉重量',
+  colorGrade: '颜色等级',
+  cutGrade: "切工等级 ",
+  clarityGrade: '净度等级',
+  polish: '磨光',
+  symmetry: "对称性",
+  fluorescence: "荧光",
+  clarityCharacteristics: "净度特征",
+  certification: "刻字",
+  origin: "起源"
 }

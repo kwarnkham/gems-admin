@@ -13,5 +13,17 @@ export default {
   phone: 'Phone',
   message: "Message",
   we_will_contact_you_shortly: "We will contact you shortly",
-  you_can_also_call_us_now: "You can also call us now"
+  you_can_also_call_us_now: "You can also call us now",
+  shape: 'Shape',
+  measurements: 'Measurements',
+  caratWeight: 'Carat weight',
+  colorGrade: 'Color grade',
+  cutGrade: "Cut grade",
+  clarityGrade: 'Clarity grade',
+  polish: 'Polish',
+  symmetry: "Symmetry",
+  fluorescence: "Fluorescence",
+  clarityCharacteristics: "Clarity Characteristics",
+  certification: "Certification",
+  origin: "Origin"
 }

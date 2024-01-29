@@ -103,7 +103,18 @@
               ].includes(key),
             }"
           >
-            <div class="capitalize">{{ key.split("_").join(" ") }}</div>
+            <div class="capitalize">
+              {{
+                $t(
+                  key
+                    .split("_")
+                    .map((e, index) =>
+                      index == 0 ? e : e.replace(/^\w/, (c) => c.toUpperCase())
+                    )
+                    .join("")
+                )
+              }}
+            </div>
 
             <div class="text-weight-bold" v-if="key == 'color_grade'">
               {{
