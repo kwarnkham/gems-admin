@@ -88,7 +88,7 @@
           :max="cutGrades.length"
           :step="1"
           v-model="cutGrade"
-          :label-value="cutGrades.find((e) => e.value == cutGrade).label"
+          :label-value="cutGrades.find((e) => e.value == cutGrade).grade"
         />
       </q-tab-panel>
 
@@ -100,7 +100,7 @@
               fit="contain"
               style="transform: scale(0.2)"
             />
-            <div class="text-white text-center">1.0 Carat</div>
+            <div class="text-white text-center">1.0 {{ $t("carat") }}</div>
           </div>
           <div class="col-5 column justify-center">
             <q-img
@@ -111,7 +111,7 @@
               }"
             />
             <div class="text-white text-center">
-              {{ (caratGrade / 10).toFixed(1) }} Carat
+              {{ (caratGrade / 10).toFixed(1) }} {{ $t("carat") }}
             </div>
           </div>
         </div>
@@ -120,7 +120,7 @@
           :max="50"
           :step="1"
           v-model="caratGrade"
-          :label-value="`${(caratGrade / 10).toFixed(1)} carat`"
+          :label-value="`${(caratGrade / 10).toFixed(1)} ${$t('carat')}`"
         />
       </q-tab-panel>
     </q-tab-panels>

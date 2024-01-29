@@ -37,13 +37,13 @@ export default function useSpec () {
     { value: 17, label: "Y-Z", grade: t('light') },
   ])
 
-  const cutGrades = [
-    { value: 1, label: "Excellent" },
-    { value: 2, label: "Very Good" },
-    { value: 3, label: "Good" },
-    { value: 4, label: "Fair" },
-    { value: 5, label: "Poor" },
-  ]
+  const cutGrades = computed(() => [
+    { value: 1, grade: t('excellent'), label: "Excellent" },
+    { value: 2, grade: t('veryGood'), label: "Very Good" },
+    { value: 3, grade: t('good'), label: "Good" },
+    { value: 4, grade: t('fair'), label: "Fair" },
+    { value: 5, grade: t('poor'), label: "Poor" },
+  ])
 
   const colorless = [1, 2, 3]
   const nearColorless = [4, 5, 6, 7]

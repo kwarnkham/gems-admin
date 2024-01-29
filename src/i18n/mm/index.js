@@ -25,5 +25,10 @@ export default {
   fluorescence: "Fluorescence",
   clarityCharacteristics: "Clarity Characteristics",
   certification: "Certification",
-  origin: "Origin"
+  origin: "Origin",
+  excellent: "Excellent",
+  veryGood: "Very good",
+  good: "Good",
+  fair: "Fair",
+  poor: "Poor"
 }

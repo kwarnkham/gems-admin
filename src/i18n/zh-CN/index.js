@@ -25,5 +25,10 @@ export default {
   fluorescence: "荧光",
   clarityCharacteristics: "净度特征",
   certification: "刻字",
-  origin: "起源"
+  origin: "起源",
+  excellent: "出色的",
+  veryGood: "非常好",
+  good: "好的",
+  fair: "公平的",
+  poor: "不太好"
 }
