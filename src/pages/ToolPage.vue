@@ -124,11 +124,18 @@
         />
       </q-tab-panel>
     </q-tab-panels>
+    <FloatingActionButton
+      @click.stop="$router.go(-1)"
+      icon="arrow_back"
+      color="info"
+      :offset="[18, 100]"
+    />
   </q-page>
 </template>
 
 <script setup>
 import AppSlider from "src/components/AppSlider.vue";
+import FloatingActionButton from "src/components/FloatingActionButton.vue";
 import useApp from "src/composables/app";
 import useSpec from "src/composables/spec";
 import { ref } from "vue";
