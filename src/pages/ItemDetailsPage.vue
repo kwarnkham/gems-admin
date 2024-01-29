@@ -20,7 +20,11 @@
       no-caps
       @click="toggleStatus"
     />
-    <div>Name : {{ item.name }}</div>
+    <div class="row items-center">
+      Name : {{ item.name }}
+      <q-btn icon="launch" flat @click="checkReference" />
+    </div>
+
     <div>Description : {{ item.description }}</div>
     <q-separator spaced />
     <q-btn
@@ -213,6 +217,11 @@ const pictures = ref([]);
 const { buildForm } = useUtils();
 
 const appStore = useAppStore();
+const checkReference = () => {
+  window.open(
+    `https://www.gia.edu/report-check?reportno=${item.value.name}&locale=en_US`
+  );
+};
 
 const updateSort = (picture) => {
   dialog({

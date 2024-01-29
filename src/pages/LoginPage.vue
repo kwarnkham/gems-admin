@@ -16,8 +16,17 @@
         type="password"
         outlined
       />
-      <div class="text-right">
+      <div class="row justify-end q-gutter-sm">
         <q-btn no-caps label="Login" type="submit" glossy />
+        <q-btn
+          no-caps
+          label="Client"
+          @click="
+            $router.push({
+              name: 'client-home',
+            })
+          "
+        />
       </div>
     </q-form>
   </q-page>

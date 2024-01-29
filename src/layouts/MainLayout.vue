@@ -17,11 +17,14 @@
         </q-toolbar-title>
 
         <q-btn
-          :label="langOptions.find((e) => e.value == language).label"
           flat
-          @click="chooseLanguage"
+          @click="
+            $router.push({
+              name: 'add-item',
+            })
+          "
           no-caps
-          icon="swap_vert"
+          icon="add"
         />
       </q-toolbar>
     </q-header>
