@@ -41,6 +41,7 @@ export default function useLocale () {
 
   return {
     language,
-    langOptions
+    langOptions,
+    locale
   }
 }
