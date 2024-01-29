@@ -16,7 +16,13 @@
           <span @click="$router.push({ name: 'home' })">Gems Admin</span>
         </q-toolbar-title>
 
-        <q-btn icon="img:icons/us.png" flat @click="chooseLanguage" />
+        <q-btn
+          :label="langOptions.find((e) => e.value == language).label"
+          flat
+          @click="chooseLanguage"
+          no-caps
+          icon="swap_vert"
+        />
       </q-toolbar>
     </q-header>
 
@@ -32,41 +38,21 @@
 
 <script setup>
 import { useQuasar } from "quasar";
-import { watch } from "vue";
+import useLocale from "src/composables/locale";
 
-const { dialog, lang } = useQuasar();
-const appLanguages = languages.filter((lang) =>
-  ["en-US", "zh-CN", "mm"].includes(lang.isoName)
-);
-const langOptions = appLanguages.map((lang) => ({
-  label: lang.nativeName,
-  value: lang.isoName,
-}));
+const { dialog } = useQuasar();
+const { language, langOptions } = useLocale();
 
-watch(language, (val) => {
-  import(
-    /* webpackInclude: /(mm|en-US|zh-CN)\.js$/ */
-    "quasar/lang/" + val
-  ).then((language) => {
-    lang.set(language.default);
-  });
-});
-
-const language = ref(lang.isoName);
 const chooseLanguage = () => {
   dialog({
     noBackdropDismiss: true,
     options: {
       type: "radio",
-      model: "en-US",
-      items: [
-        { label: "English", value: "en-US" },
-        { label: "中文", value: "zh-CN" },
-        { label: "မြန်မာ", value: "mm" },
-      ],
+      model: language.value,
+      items: langOptions,
     },
   }).onOk((val) => {
-    console.log(val);
+    language.value = val;
   });
 };
 </script>
