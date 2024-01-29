@@ -63,37 +63,17 @@
 </template>
 
 <script setup>
-import { useDialogPluginComponent } from "quasar";
+import { useDialogPluginComponent, useQuasar } from "quasar";
 import useSpec from "src/composables/spec";
 import { ref } from "vue";
 
-const props = defineProps({
-  propCut: {
-    type: String,
-    default: "",
-  },
-  propColor: {
-    type: String,
-    default: "",
-  },
-  propClarity: {
-    type: String,
-    default: "",
-  },
-  propCarat: {
-    type: String,
-    default: "",
-  },
-  propPrice: {
-    type: String,
-    default: "",
-  },
-});
-const cutGrade = ref(props.propCut);
-const clarityGrade = ref(props.propClarity);
-const carat = ref(props.propCarat);
-const colorGrade = ref(props.propColor);
-const price = ref(props.propPrice);
+const { localStorage } = useQuasar();
+
+const cutGrade = ref(localStorage.getItem("cutSearch") ?? null);
+const clarityGrade = ref(localStorage.getItem("claritySearch") ?? null);
+const carat = ref(localStorage.getItem("caratSearch") ?? "");
+const colorGrade = ref(localStorage.getItem("colorSearch") ?? null);
+const price = ref(localStorage.getItem("priceSearch") ?? "");
 
 defineEmits([...useDialogPluginComponent.emits]);
 

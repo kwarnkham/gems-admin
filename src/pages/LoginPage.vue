@@ -64,7 +64,7 @@ const submit = () => {
       });
     })
     .catch((e) => {
-      console.log(e.message);
+      console.warn(e.message);
       notify({
         message: e.response?.data?.message || e.message,
         type: "negative",
