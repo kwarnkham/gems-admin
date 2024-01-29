@@ -2,7 +2,7 @@
   <q-dialog ref="dialogRef" @hide="onDialogHide" no-backdrop-dismiss dark>
     <q-card class="q-dialog-plugin">
       <q-card-section>
-        <div class="text-center text-h6">Set you maximum</div>
+        <div class="text-center text-h6">{{ $t("set_your_maximum") }}</div>
       </q-card-section>
       <q-form
         @submit.prevent="
@@ -17,23 +17,23 @@
             type="number"
             inputmode="numeric"
             pattern="\d+(\.\d+)?"
-            label="Carat"
+            :label="$t('caratWeight')"
           />
           <q-select
             outlined
-            label="Color Grade"
+            :label="$t('colorGrade')"
             v-model="colorGrade"
             :options="colorGrades"
           />
           <q-select
             outlined
-            label="Clarity Grade"
+            :label="$t('clarityGrade')"
             v-model="clarityGrade"
             :options="clarityGrades"
           />
           <q-select
             outlined
-            label="Cut Grade"
+            :label="$t('cutGrade')"
             v-model="cutGrade"
             :options="cutGrades"
           />
@@ -44,17 +44,18 @@
             type="number"
             inputmode="numeric"
             pattern="\d+(\.\d+)?"
-            label="Price"
+            :label="$t('price')"
+            placeholder="USD"
           />
         </q-card-section>
         <q-card-actions align="right">
           <q-btn
             color="primary"
-            label="Cancel"
+            :label="$t('cancel')"
             @click="onDialogCancel"
             no-caps
           />
-          <q-btn color="primary" label="Ok" type="submit" no-caps />
+          <q-btn color="primary" :label="$t('ok')" type="submit" no-caps />
         </q-card-actions>
       </q-form>
     </q-card>

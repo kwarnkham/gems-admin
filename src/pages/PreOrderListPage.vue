@@ -59,7 +59,7 @@
 
     <FloatingActionButton
       icon="add"
-      @click="
+      @click.stop="
         $router.push({
           name: 'add-pre-order',
         })

@@ -30,5 +30,9 @@ export default {
   veryGood: "Very good",
   good: "Good",
   fair: "Fair",
-  poor: "Poor"
+  poor: "Poor",
+  set_your_maximum: "အများဆုံးကိုသတ်မှတ်ပါ",
+  price: "စျေးနှုန်း",
+  ok: "Ok",
+  cancel: "Cancel"
 }

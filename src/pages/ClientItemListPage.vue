@@ -29,7 +29,7 @@
     <FloatingActionButton
       icon="search"
       color="info"
-      @click="showSearchDialog"
+      @click.stop="showSearchDialog"
       :opacity="0.7"
     />
   </q-page>

@@ -28,7 +28,7 @@
     </div>
     <div class="text-center" v-else>You've never met this contact yet</div>
     <FloatingActionButton
-      @click="
+      @click.stop="
         $router.push({
           name: 'pre-order-list',
           query: {

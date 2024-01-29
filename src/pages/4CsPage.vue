@@ -105,7 +105,7 @@
       </p>
     </div>
 
-    <FloatingActionButton @click="$router.go(-1)" icon="arrow_back" />
+    <FloatingActionButton @click.stop="$router.go(-1)" icon="arrow_back" />
   </q-page>
 </template>
 <script setup>

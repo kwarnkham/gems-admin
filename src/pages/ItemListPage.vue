@@ -31,7 +31,7 @@
       <q-spinner-dots size="md" />
     </div>
     <FloatingActionButton
-      @click="$router.push({ name: 'add-item' })"
+      @click.stop="$router.push({ name: 'add-item' })"
       icon="add"
     />
   </q-page>

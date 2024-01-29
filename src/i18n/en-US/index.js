@@ -30,5 +30,9 @@ export default {
   veryGood: "Very good",
   good: "Good",
   fair: "Fair",
-  poor: "Poor"
+  poor: "Poor",
+  set_your_maximum: "Set your maximum",
+  price: "Price",
+  ok: "Ok",
+  cancel: "Cancel"
 }

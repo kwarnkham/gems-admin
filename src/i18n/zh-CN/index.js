@@ -30,5 +30,9 @@ export default {
   veryGood: "非常好",
   good: "好的",
   fair: "公平的",
-  poor: "不太好"
+  poor: "不太好",
+  set_your_maximum: "设置最大值",
+  price: "价格",
+  ok: "Ok",
+  cancel: "取消"
 }

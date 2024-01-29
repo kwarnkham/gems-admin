@@ -141,7 +141,7 @@
       </div>
     </div>
     <FloatingActionButton
-      @click="$router.go(-1)"
+      @click.stop="$router.go(-1)"
       icon="arrow_back"
       color="info"
     />
