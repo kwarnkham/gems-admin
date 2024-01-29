@@ -42,6 +42,9 @@
       :opacity="0.7"
     />
   </q-page>
+  <q-page v-else class="flex flex-center">
+    <q-spinner-ios color="primary" size="xl" />
+  </q-page>
 </template>
 
 <script setup>
