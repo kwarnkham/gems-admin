@@ -1,11 +1,7 @@
 <template>
-  <q-page padding v-if="pagination" class="row content-baseline">
+  <q-page padding v-if="pagination" class="column no-wrap" v-scroll="fetchMore">
     <template v-if="pagination.data.length > 0">
-      <div
-        class="q-pa-sm col-12"
-        v-for="item in pagination.data"
-        :key="item.id"
-      >
+      <div class="q-pa-sm col" v-for="item in pagination.data" :key="item.id">
         <q-card
           class="rounded"
           dark
@@ -31,6 +27,9 @@
           </q-img>
         </q-card>
       </div>
+      <div class="text-center full-width" v-if="fetching">
+        <q-spinner-dots size="md" color="white" />
+      </div>
     </template>
     <div v-else class="fit flex flex-center">
       <q-spinner-dots color="white" size="xl" class="q-mt-md" />
@@ -49,20 +48,29 @@
 
 <script setup>
 import FloatingActionButton from "src/components/FloatingActionButton.vue";
-import { useQuasar } from "quasar";
+import { debounce, useQuasar } from "quasar";
 import usePagination from "src/composables/pagination";
 import SearchItemDialog from "src/components/SearchItemDialog.vue";
+import useUtils from "src/composables/utils";
 
 const { dialog, localStorage } = useQuasar();
+const { isScrollEndByBody } = useUtils();
 const params = {
   per_page: 10,
   status: 1,
 };
-const { pagination, updateQueryAndFetch } = usePagination({
-  url: "items",
-  append: true,
-  params,
-});
+const { pagination, updateQueryAndFetch, fetching, currentPage } =
+  usePagination({
+    url: "items",
+    append: true,
+    params,
+  });
+
+const fetchMore = debounce((position) => {
+  if (isScrollEndByBody(position)) {
+    if (pagination.value.last_page > currentPage.value) currentPage.value += 1;
+  }
+}, 500);
 
 const showSearchDialog = () => {
   dialog({
