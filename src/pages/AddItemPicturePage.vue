@@ -87,7 +87,7 @@ const { notify, dialog } = useQuasar();
 const item = ref(null);
 const pictures = ref([]);
 const previews = ref([]);
-const { buildForm } = useUtils();
+const { buildForm, getImageFromFile } = useUtils();
 const router = useRouter();
 const { colorGrades, clarityGrades, cutGrades } = useSpec();
 const removePicture = (key) => {
@@ -107,11 +107,9 @@ watch(
     if (pictures.value.length == 0) return;
     previews.value = [];
     pictures.value.forEach((picture) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        previews.value.push(e.target.result);
-      };
-      reader.readAsDataURL(picture);
+      getImageFromFile(picture).then((response) => {
+        previews.value.push(response);
+      });
     });
   },
   { deep: true }

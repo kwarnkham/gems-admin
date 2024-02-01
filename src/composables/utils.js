@@ -20,6 +20,20 @@ export default function useUtils () {
     return isScrollEnd
   }
 
+  const getImageFromFile = (file) => {
+    return new Promise((resolve, reject) => {
+      try {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          resolve(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
   const trimObject = (obj) => {
     const newObj = {};
     for (const key in obj) {
@@ -34,5 +48,5 @@ export default function useUtils () {
     return newObj;
   }
 
-  return { buildForm, isScrollEndByBody, trimObject }
+  return { buildForm, isScrollEndByBody, trimObject, getImageFromFile }
 }
