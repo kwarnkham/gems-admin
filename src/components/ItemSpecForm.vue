@@ -71,9 +71,9 @@ const props = defineProps({
 });
 
 const { notify } = useQuasar();
-const polish = ref(props.item.specification?.polish ?? "");
-const symmetry = ref(props.item.specification?.symmetry ?? "");
-const fluorescence = ref(props.item.specification?.fluorescence ?? "");
+const polish = ref(props.item.specification?.polish ?? "Excellent");
+const symmetry = ref(props.item.specification?.symmetry ?? "Excellent");
+const fluorescence = ref(props.item.specification?.fluorescence ?? "None");
 const clarityCharacteristics = ref(
   props.item.specification?.clarity_characteristics ?? ""
 );
