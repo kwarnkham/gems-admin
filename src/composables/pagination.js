@@ -8,6 +8,7 @@ export default function usePagination ({ url, params = { per_page: 10 }, append 
   const totalAmount = ref(0)
   const currentPage = ref(1);
   const fetching = ref(false)
+  const replace = ref(false)
   let filters = { ...params }
   const { trimObject } = useUtils()
 
@@ -28,10 +29,10 @@ export default function usePagination ({ url, params = { per_page: 10 }, append 
     })
   };
 
-  const fetch = (query, replace = false) => {
+  const fetch = (query) => {
     fetching.value = true
     fetcher(query).then(({ data }) => {
-      if (append && pagination.value && !replace) {
+      if (append && pagination.value && !replace.value) {
         const oldData = JSON.parse(JSON.stringify(pagination.value.data))
         data.data.data = [...oldData, ...data.data.data]
       }
@@ -45,10 +46,12 @@ export default function usePagination ({ url, params = { per_page: 10 }, append 
     })
       .finally(() => {
         fetching.value = false
+        replace.value = false
       });
   }
 
   const updateQueryAndFetch = (newQuery) => {
+    replace.value = true
     filters = { ...filters, ...newQuery }
     if (currentPage.value == 1) fetch(filters)
     else currentPage.value = 1
@@ -68,6 +71,6 @@ export default function usePagination ({ url, params = { per_page: 10 }, append 
     currentPage,
     totalAmount,
     updateQueryAndFetch,
-    fetching
+    fetching,
   }
 }

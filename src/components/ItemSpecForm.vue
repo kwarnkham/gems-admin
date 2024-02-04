@@ -82,7 +82,9 @@ const caratWeight = ref(props.item.specification?.carat_weight ?? "");
 const cutGrade = ref(props.item.specification?.cut_grade ?? "");
 const clarityGrade = ref(props.item.specification?.clarity_grade ?? "");
 const colorGrade = ref(props.item.specification?.color_grade ?? "");
-const certification = ref(props.item.specification?.certification ?? "");
+const certification = ref(
+  props.item.specification?.certification ?? "GIA " + props.item.name
+);
 const origin = ref(props.item.specification?.origin ?? "");
 const shape = ref(props.item.specification?.shape ?? "");
 
