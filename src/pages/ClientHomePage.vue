@@ -1,6 +1,27 @@
 <template>
-  <q-page>
-    <q-img src="~/assets/4Cs-diamonds.jpg" />
+  <q-page class="relative-position">
+    <div
+      class="ad-container row no-wrap"
+      :class="{ stop: !moving }"
+      @click="moving = !moving"
+    >
+      <q-img src="~/assets/ad1.png" class="col-12" />
+      <q-img src="~/assets/ad2.png" class="col-12" />
+      <q-img src="~/assets/ad3.png" class="col-12" />
+      <q-img src="~/assets/4Cs-diamonds.jpg" class="col-12" />
+    </div>
+
+    <div
+      class="ad-container-make-up row no-wrap absolute-top"
+      :class="{ stop: !moving }"
+      @click="moving = !moving"
+    >
+      <q-img src="~/assets/ad1.png" class="col-12" />
+      <q-img src="~/assets/ad2.png" class="col-12" />
+      <q-img src="~/assets/ad3.png" class="col-12" />
+      <q-img src="~/assets/4Cs-diamonds.jpg" class="col-12" />
+    </div>
+
     <div class="q-pa-md text-indigo-9">
       <template v-if="locale == 'zh-CN'">
         <div class="text-weight-bold text-subtitle1">4C 标准</div>
@@ -97,6 +118,45 @@
 
 <script setup>
 import useLocale from "src/composables/locale";
+import { ref } from "vue";
 
 const { locale } = useLocale();
+const moving = ref(true);
 </script>
+
+<style lang="scss" scoped>
+.stop {
+  .q-img {
+    animation-play-state: paused !important;
+  }
+}
+.ad-container {
+  overflow: hidden;
+  .q-img {
+    animation: moveRightToLeft 8s linear infinite;
+  }
+}
+@keyframes moveRightToLeft {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-300%);
+  }
+}
+
+.ad-container-make-up {
+  overflow: hidden;
+  .q-img {
+    animation: moveRightToLeft2 8s linear infinite;
+  }
+}
+@keyframes moveRightToLeft2 {
+  from {
+    transform: translateX(300%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+</style>
