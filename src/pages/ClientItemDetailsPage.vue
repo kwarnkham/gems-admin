@@ -36,7 +36,7 @@
     </q-carousel>
     <div class="info col column">
       <div
-        class="spotlight row justify-between items-center q-px-sm"
+        class="spotlight row justify-between items-center"
         @click="showDescription"
       >
         <div>
@@ -86,6 +86,14 @@
         class="row text-white col justify-between q-px-md"
         v-if="item.specification"
       >
+        <div class="text-right col-12 q-mt-xs">
+          <q-btn
+            icon="info"
+            glossy
+            class="bg-white text-primary"
+            @click="showChart"
+          />
+        </div>
         <template v-for="key in Object.keys(item.specification)">
           <div
             :key="key"
@@ -159,6 +167,7 @@ import useApp from "src/composables/app";
 import { useAppStore } from "src/stores/app-store";
 import { computed } from "vue";
 import useSpec from "src/composables/spec";
+import RadarChartDialog from "src/components/RadarChartDialog.vue";
 
 const route = useRoute();
 const item = ref(null);
@@ -171,6 +180,28 @@ const router = useRouter();
 const { cutGrades, colorGrades, clarityGrades } = useSpec();
 const number = "+959452538242";
 
+const showChart = () => {
+  dialog({
+    component: RadarChartDialog,
+    componentProps: {
+      colorGrade: colorGrades.value.find(
+        (e) => e.value == item.value.specification.color_grade
+      ).value,
+      clarityGrade: clarityGrades.find(
+        (e) => e.value == item.value.specification.clarity_grade
+      ).value,
+      cutGrade: cutGrades.value.find(
+        (e) => e.value == item.value.specification.cut_grade
+      ).value,
+      polishGrade: cutGrades.value.find(
+        (e) => e.label == item.value.specification.polish
+      ).value,
+      symmetryGrade: cutGrades.value.find(
+        (e) => e.label == item.value.specification.symmetry
+      ).value,
+    },
+  });
+};
 const showDescription = () => {
   if (item.value.description)
     dialog({
@@ -233,11 +264,11 @@ onMounted(() => {
 .spotlight {
   font-weight: 500;
   font-size: 1.2em;
-  height: 50px;
   width: 100%;
   border-radius: 20px;
   background-color: rgb(20, 34, 51);
   color: white;
+  padding: 20px 12px;
 }
 :deep(.q-carousel__slide) {
   background-size: contain;
